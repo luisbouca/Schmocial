@@ -2,23 +2,21 @@ var User = require('../models/user')
 
 const Users = module.exports
 
-//Returns obra list
-
-listaCompras.list = ()=>{
+//Returns Users list
+Users.list = ()=>{
     return User
-        .find()
-        .sort({username:1})
+        .find({})
         .exec()
 }
 
-//return obra by id
-listaCompras.getByState = state=>{
+//Returns User by name
+Users.getByName = name=>{
     return User
-        .findOne({estado: state})
+        .findOne({name: name})
         .exec()
 }
-//count obras
-listaCompras.insertNew = newEntrada=>{
+//Create new User
+Users.insertNew = newDoc=>{
     return User
-        .create(newEntrada)
+        .create(newDoc)
 }
