@@ -4,8 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
+//Database Connection
+var mongose = require('mongoose')
+mongose.connect('mongodb://127.0.0.1:27017/schmocial',{useNewUrlParser: true}).then(()=>{
+    console.log('Mongo Ready: '+mongose.connection.readyState)
+}).catch(e=>{
+    console.log('Mongo: Error in connection.')
+})
+
+
 
 var app = express();
 
@@ -18,6 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//Routes
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
