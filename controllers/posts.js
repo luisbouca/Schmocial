@@ -12,7 +12,7 @@ Posts.list = ()=>{
 //Returns Comment list for post by id
 Posts.listComments = id=>{
     return Post
-        .findOne({_id:id},{comments:1})
+        .findOne({_id:id},{comments:1, _id:0})
         .exec()
 }
 
