@@ -1,15 +1,52 @@
 extends layout
 
 block content
-	.w3-container
-		.w3-card-4.w3-black
-			header.w3-container.w3-text-White
-			h3= title
-		.w3-container.w3-light-grey
+	.w3-top
+		.w3-bar#navBar.w3-black
+			header.w3-container.w3-text-White.w3
+				h3= title
+			form.w3-container.w3-display-right(action="/signin" method="POST")
+				input(type="text" name="username" placeholder="Username").w3-margin-right
+				input(type="password" name="password" placeholder="Password").w3-margin-right
+				input(type="submit" value="Login").w3-button.w3-white
+			//a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+			//	<i class="fa fa-search"></i>
+			//</a>
+	.w3-container.w3-white(style="height:100%")
+		.w3-container.w3-margin
+		.w3-container.w3-half.w3-margin-top
+			p Welcome to Schmocial a network for you and your friends
+			img(src="/images/homepage.jpg" style="width:50%").w3-round.w3-grayscale-max
+		.w3-container.w3-half.w3-margin-top
+			h5 Sign Up
+			form.w3-container(action="/signup" method="POST").w3-black.w3-margin
+				.w3container.w3-margin
+					label Full Name
+					input(type="text" name="name" placeholder="Name" style="width:100%")
+				.w3container.w3-margin
+					label Email
+						input(type="text" name="email" placeholder="Email" style="width:100%")
+				.w3-container.w3-half
+					label Username
+						input(type="text" name="username" placeholder="Username" style="width:100%")
+				.w3-container.w3-half
+					label Password
+						input(type="password" name="password" placeholder="Password" style="width:100%")
+				.w3-container.w3-half
+					label Age
+						input(type="text" name="age" placeholder="Age" style="width:100%")
+				.w3-container.w3-half
+					label Gender
+						input(type="text" name="gender" placeholder="Gender" style="width:100%")
+				.w3-container.w3-half
+					label Country
+						input(type="text" name="country" placeholder="Country" style="width:100%")
+				.w3-container.w3-half
+					label City
+						input(type="text" name="city" placeholder="City" style="width:100%")
+				input(type="submit" value="Sign Up").w3-button.w3-white.w3-margin
 
-
-			p Welcome to Schmocial
-			p the next big thing
 			
-		footer.w3-container.w3-black
-			address Copyright@Schmocial 2018
+			
+	footer.w3-container.w3-black
+		address Copyright@Schmocial 2018
