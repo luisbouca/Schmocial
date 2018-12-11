@@ -27,7 +27,7 @@ router.post('/signin', async (req, res, next) => {
 					return next(new Error(info.message))//TODO
 				} 
 			}
-			req.login(user, { session : false }, async (error) => {
+			req.login(user, async (error) => {
 				if( error ) return next(error)
 				var myuser = { _id : user._id, email : user.email };
 				// Geração do token

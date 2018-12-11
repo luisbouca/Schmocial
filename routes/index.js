@@ -3,7 +3,12 @@ var router = express.Router();
 
 /* Home page. */
 router.get('/', function(req, res) {
+
+  if(req.isAuthenticated()){
+    res.redirect('/home')
+  }else{
     res.render('index', { title: 'Welcome to Schmocial' });
+  }
 });
 
 //Middleware Protection
@@ -11,12 +16,6 @@ function verifyAuth(req, res, next){
 	if(req.isAuthenticated()) next()
 	else res.redirect("/signin")
 }
-/*
-//Middleware Protection
-function verifyAuth2(req, res, next){
-	if(!req.isAuthenticated()) next()
-	else res.redirect("/home")
-}*/
 
 /* Login page.*/
 router.get('/signin', function(req, res) {
