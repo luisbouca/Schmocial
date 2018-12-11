@@ -5,8 +5,8 @@ block content
 		.w3-bar#navBar.w3-black
 			header.w3-container.w3-text-White.w3
 				h3= title
-			form.w3-container.w3-display-right(action="/signin" method="POST")
-				input(type="text" name="username" placeholder="Username").w3-margin-right
+			form.w3-container.w3-display-right(action="/users/signin" method="POST")
+				input(type="text" name="email" placeholder="Email").w3-margin-right
 				input(type="password" name="password" placeholder="Password").w3-margin-right
 				input(type="submit" value="Login").w3-button.w3-white
 			//a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">

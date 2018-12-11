@@ -15,6 +15,14 @@ Users.getByName = name=>{
         .findOne({name: name})
         .exec()
 }
+
+//Returns User by id
+Users.getById = id=>{
+    return User
+        .findOne({_id: id})
+        .exec()
+}
+
 //Create new User
 Users.insertNew = newDoc=>{
     return User

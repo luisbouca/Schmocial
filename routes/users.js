@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport')
 var axios = require('axios')
+var jwt = require('jsonwebtoken')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -9,21 +10,21 @@ router.get('/', function(req, res, next) {
 });
 
 //Get Login Page
-router.get('/Login', (req, res)=>{
+router.get('/signin', (req, res)=>{
 	Users.list()
 	.then(dados => res.jsonp(dados))
 	.catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
 //Post Login
-router.post('/login', async (req, res, next) => {
+router.post('/signin', async (req, res, next) => {
 	passport.authenticate('login', async (err, user, info) => {     
 		try {
 			if(err || !user){
 				if(err){
 					return next(err);
 				}else{
-					return next(new Error(info.message))
+					return next(new Error(info.message))//TODO
 				} 
 			}
 			req.login(user, { session : false }, async (error) => {
@@ -32,7 +33,7 @@ router.post('/login', async (req, res, next) => {
 				// Geração do token
 				var token = jwt.sign({ user : myuser },'dweb2018');
 				req.session.token = token
-				res.redirect('/api/users/' + user.email)
+				res.redirect('/home')
 			});     
 		} 
 		catch (error) {

@@ -20,7 +20,13 @@ router.get('/users', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 //Get user by name
-router.get('/users/:name', (req, res)=>{
+router.get('/users/:id', (req, res)=>{
+    Users.getById(req.params.id)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+//Get user by name
+router.get('/users/name/:name', (req, res)=>{
     Users.getByName(req.params.name)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))

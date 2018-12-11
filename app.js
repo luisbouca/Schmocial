@@ -5,6 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+var uuid = require('uuid/v4')
+var session = require('express-session')
+var FileStore = require('session-file-store')(session)
+var passport = require('passport')
+
+
 //Database Connection
 var mongose = require('mongoose')
 mongose.connect('mongodb://127.0.0.1:27017/schmocial',{useNewUrlParser: true}).then(()=>{
@@ -18,16 +24,10 @@ mongose.connect('mongodb://127.0.0.1:27017/schmocial',{useNewUrlParser: true}).t
 var app = express();
 
 
-//Auth
-var passport = require('passport')
-require('./auth/auth')
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 //session
-var uuid = require('uuid/v4')
-var session = require('express-session')
-var FileStore = require('session-file-store')(session)
+
 app.use(session({
   genid: () => {
     return uuid()},
@@ -36,6 +36,22 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+//Auth
+app.use(passport.initialize())
+app.use(passport.session())
+require('./auth/auth')
+
+//Serialização do utilizador
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+// Funçaõ inversa
+passport.deserializeUser((uid, done) => {
+  axios.get('http://localhost:3000/api/users/' + uid)
+    .then(dados => done(null, dados.data))
+    .catch(erro => done(erro, false))
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
