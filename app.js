@@ -17,6 +17,26 @@ mongose.connect('mongodb://127.0.0.1:27017/schmocial',{useNewUrlParser: true}).t
 
 var app = express();
 
+
+//Auth
+var passport = require('passport')
+require('./auth/auth')
+app.use(passport.initialize())
+app.use(passport.session())
+
+//session
+var uuid = require('uuid/v4')
+var session = require('express-session')
+var FileStore = require('session-file-store')(session)
+app.use(session({
+  genid: () => {
+    return uuid()},
+  store: new FileStore(),
+  secret: 'dweb2018',
+  resave: false,
+  saveUninitialized: true
+}))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

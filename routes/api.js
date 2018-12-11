@@ -3,6 +3,8 @@ var router = express.Router();
 var Users = require('../controllers/users')
 var Events = require('../controllers/events')
 var Posts = require('../controllers/posts')
+var passport = require('passport')
+var jwt = require('jsonwebtoken')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -29,6 +31,8 @@ router.post('/users', (req, res)=>{
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA INSERÇAO'))
 })
+
+
 
 
 //EVENT API ROUTES

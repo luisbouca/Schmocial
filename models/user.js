@@ -1,4 +1,6 @@
 var mongose = require('mongoose')
+var bcrypt = require('bcryptjs')
+var md5 = require('md5')
 
 var schema = mongose.Schema
 
@@ -17,5 +19,16 @@ var UserSchema = new schema({
     address: addressSchema
 })
 
+UserSchema.pre('save', async function(next){
+    var hash = await bcrypt.hash(md5(this.password), 10)
+    this.password = hash
+    next()
+})
+
+UserSchema.methods.isValidPassword = async function(password){
+    var user = this
+    var compare = await bcrypt.compare(md5(password), user.password)
+    return compare
+}
 
 module.exports = mongose.model('Users', UserSchema,'users')
