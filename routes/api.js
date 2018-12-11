@@ -24,7 +24,7 @@ router.get('/users/:name', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 //Insert User
-router.post('/users', (req, res)=>{
+router.post('/users/signup', (req, res)=>{
     Users.insertNew(req.body)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA INSERÇAO'))
