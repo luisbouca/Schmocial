@@ -24,7 +24,7 @@ router.get('/signin', function(req, res) {
 
 /* Login page.*/
 router.get('/home',verifyAuth, function(req, res) {
-  res.render('index', { title: 'Welcome to Schmocial User' });
+  res.render('home', { title: 'Welcome to Schmocial User' });
 });
 
 

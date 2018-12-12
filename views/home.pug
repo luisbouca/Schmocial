@@ -1,29 +1,184 @@
 extends layout
 
 block content
+	//navbar
 	.w3-top
 		.w3-bar#navBar.w3-black
-			header.w3-container.w3-text-White.w3
-				h3= title
 			a.w3-bar-item.w3-button.w3-hover-black.w3-hide-medium.w3-hide-large.w3-right(href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu")
 				i.fa.fa-bars
-			a(href="#home").w3-bar-item.w3-button HOME
-			a(href="#about").w3-bar-item.w3-button.w3-hide-small ABOUT
-			a(href="#portfolio").w3-bar-item.w3-button.w3-hide-small PORTFOLIO
-			a(href="#contact").w3-bar-item.w3-button.w3-hide-small CONTACT
-			
-			//a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
-			//	<i class="fa fa-search"></i>
-			//</a>
-	.w3-container
-		.w3-card-4.w3-black
-			header.w3-container.w3-text-White
-			h3= title
-		.w3-container.w3-light-grey
+			a(href="#").w3-bar-item.w3-button.w3-padding-large.w3-theme-d4
+				i Schmocial
+			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-globe
+			a(href="#" title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-user
+			a(href="#" title="Messages").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-envelope
+			.w3-dropdown-hover-w3-hide-small
+				button.w3-button.w3-padding-large(title="Notifications")
+					i.fa.fa-bell
+					span.w3-badge.w3-right.w3-small.w3-white 3
+				.w3-dropdown-content.w3-card-4.w3-bar-block(style="width:300px")
+					a.w3-bar-item.w3-button(href="#") One new friend request
+					a.w3-bar-item.w3-button(href="#") John Doe posted on your wall
+					a.w3-bar-item.w3-button(href="#") Jane upvoted your post
+			a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-padding-large.w3-hover-white(title="My Account")
+				img.w3-circle(src="/w3images/avatar2.png" style="height:23px;width:23px" alt="Avatar")
+	//Grid
+	.w3-container.w3-content(style="max-width:1400px;margin-top:80px")
+		.w3-row
+			//left Column
+			.w3-col.m3
+				//Profile
+				.w3-card.w3-round.w3-white
+					.w3-container
+						h4.w3-center My Profile
+						p.w3-center
+							img.w3-circle(src="/w3images/avatar3.png" style="height:106px;width:106px" alt="Avatar")
+						hr
+						p
+							i.fa.fa-pencil.fa-fw.w3-margin-right.w3-text-theme Designer, UI
+						p
+							i.fa.fa-pencil.fa-fw.w3-margin-right.w3-text-theme London, UK
+						p
+							i.fa.fa-pencil.fa-fw.w3-margin-right.w3-text-theme April 1, 1988
+				br
+				///Accordion
+				.w3-card.w3-round
+					.w3-white
+						button.w3-button.w3-block.w3-theme-l1.w3-left-align(onclick="myFunction('Demo1')") My Groups
+							i.fa.fa-circle-o-notch.fa-fw.w3-margin-right
+						.w3-hide.w3-container#Demo1
+							p Some text
+						button.w3-button.w3-block.w3-theme-l1.w3-left-align(onclick="myFunction('Demo2')") My Events
+							i.fa.fa-calendar-check-o.fa-fw.w3-margin-right
+						.w3-hide.w3-container#Demo2
+							p Some text
+						button.w3-button.w3-block.w3-theme-l1.w3-left-align(onclick="myFunction('Demo3')") My Photos
+							i.fa.fa-users.fa-fw.w3-margin-right
+						.w3-hide.w3-container#Demo3
+							.w3-row-padding
+								br
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/lights.jpg" style="width:100%")
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%")
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/mountains.jpg" style="width:100%")
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/forest.jpg" style="width:100%")
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%")
+								.w3-half
+									img.w3-margin-bottom(src="/w3images/snow.jpg" style="width:100%")
+				br
+				.w3-card.w3-round.w3-white.w3-hide-small
+					.w3-container
+						p Interests
+						p
+							span.w3-tag.w3-small.w3-theme.d5 News
+							span.w3-tag.w3-small.w3-theme.d4 W3Schools
+							span.w3-tag.w3-small.w3-theme.d3 Labels
+							span.w3-tag.w3-small.w3-theme.d2 Games
+							span.w3-tag.w3-small.w3-theme.d1 Friends
+							span.w3-tag.w3-small.w3-theme Games
+							span.w3-tag.w3-small.w3-theme.l1 Friends
+							span.w3-tag.w3-small.w3-theme.l2 Food
+							span.w3-tag.w3-small.w3-theme.l3 Design
+							span.w3-tag.w3-small.w3-theme.l4 Art
+							span.w3-tag.w3-small.w3-theme.l5 Photos
+				br
+				//Alert Box
+				.w3-container.w3-display-container.w3-round.w3-theme-l4.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
+					span.w3-button.w3-theme-l3.w3-display-topright(onclick="this.parentElement.style.display='none'")
+						i.fa.fa-remove
+					p
+						strong Hey!
+					p People are looking at your profile. Find out who.
+			//Middle Column
+			.w3-col.m7
+				.w3-row-padding
+					.w3-col.m12
+						.w3-card.w3-round.w3-white
+							.w3-container.w3-padding
+								h6.w3-opacity Schmocial post
+								p.w3-border.w3-padding(contenteditable="true") Status: Feeling Blue
+								button.w3-button.w3-theme(type="button")
+									i.fa.fa-pencil Post
+				.w3-container.w3-card.w3-white.w3-round.w3-margin
+					br
+					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar2.png" alt="Avatar")
+					span.w3-right.w3-opacity 1 min
+					h4 John Doe
+					br
+					hr.w3-clear
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					.w3-row-padding( style="margin:0 -16px")
+						.w3-half
+							img.w3-margin-bottom(src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights")
+						.w3-half
+							img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%" alt="Nature")
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-thumbs-up Like
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-comment Comment
+				.w3-container.w3-card.w3-white.w3-round.w3-margin
+					br
+					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar5.png" alt="Avatar")
+					span.w3-right.w3-opacity 16 min
+					h4 Jane Doe
+					br
+					hr.w3-clear
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-thumbs-up Like
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-comment Comment
+				.w3-container.w3-card.w3-white.w3-round.w3-margin
+					br
+					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+					span.w3-right.w3-opacity 32 min
+					h4 Angie Jane
+					br
+					hr.w3-clear
+					p Have you seen this?
+					img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%")
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-thumbs-up Like
+					button.w3-button.w3-theme-d1.w3-margin-bottom(type="button")
+						i.fa.fa-comment Comment
+			//Right Column
+			.w3-col.m2
+				.w3-card.w3-round.w3-white.w3-center
+					.w3-container
+						p Upcoming Events:
+						img(src="/w3images/forest.jpg" alt="Forest" style="width:100%;")
+						p
+							strong Holiday
+						p Friday 15:00
+						p
+							button.w3-button.w3-block.w3-theme-l4 Info
+				br
+				.w3-card.w3-round.w3-white.w3-center
+					.w3-container
+						p Friend Request:
+						img(src="/w3images/avatar6.jpg" alt="Avatar" style="width:50%;")
+						span Jane Doe
+						.w3-row.w3-opacity
+							.w3-half
+								button.w3-button.w3-block.w3-green.w3-section(title="Accept")
+									i.fa.fa-check
+							.w3-half
+								button.w3-button.w3-block.w3-red.w3-section(title="Decline")
+									i.fa.fa-remove
+				br
+				.w3-card.w3-round.w3-white.w3-padding-16.w3-center
+					p ADS
+				br
+				.w3-card.w3-round.w3-white.w3-padding-32.w3-center
+					p
+						i.fa.fa-bug.w3-xxlarge
 
-
-			p Welcome to Schmocial
-			p the next big thing
-			
 		footer.w3-container.w3-black
 			address Copyright@Schmocial 2018
