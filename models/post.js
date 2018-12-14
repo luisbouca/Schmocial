@@ -16,11 +16,13 @@ var voteSchema = new schema({
 
 
 var postSchema = new schema({
+    owner: {type: String, required:true},
     title: {type: String, required:true},
     date: {type: String, required:true},
     content: {type: String},
     picture:{type: String},
     file:{type:String},
+    state:{type:String},
     comments: commentSchema,
     votes: voteSchema
     

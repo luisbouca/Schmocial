@@ -108,10 +108,13 @@ block content
 					.w3-col.m12
 						.w3-card.w3-round.w3-black
 							.w3-container.w3-padding
-								h6.w3-opacity Schmocial post
-								p.w3-border.w3-padding(contenteditable="true") Status: Feeling Blue
-								button.w3-button.w3-white(type="button")
-									i.fa.fa-pencil Post
+								form.w3-container(action="/insertPost" method="POST" enctype="multipart/form-data")
+									h6.w3-opacity Schmocial post
+									p.w3-border.w3-padding 
+										input(type='text', name="descricao" placeholder="Status: Feeling Blue")
+									input.w3-input.w3-boarder.w3-light-grey(type='file', name="ficheiro") 
+									br
+									input.w3-btn.w3-blue-grey(type="submit", value="Post") 
 				.w3-container.w3-card.w3-black.w3-round.w3-margin
 					br
 					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar2.png" alt="Avatar")

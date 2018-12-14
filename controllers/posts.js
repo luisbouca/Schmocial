@@ -22,6 +22,13 @@ Posts.getByTitle = title=>{
         .findOne({title: title})
         .exec()
 }
+
+//Returns Posts by user
+Posts.getByUser = user=>{
+    return Post
+        .find({owner: user})
+        .exec()
+}
 //Create new Posts
 Posts.insertNew = newDoc=>{
     return Post
