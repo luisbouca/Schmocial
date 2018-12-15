@@ -96,6 +96,14 @@ router.post('/posts', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//insert new comment on Post
+router.post('/posts/comment/:id', (req, res)=>{
+    console.log("Recebi pedido comentario+"+req.body.comment) 
+    Posts.insertNewComent(req.params.id,req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
 
 
 

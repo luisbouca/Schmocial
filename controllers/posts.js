@@ -30,8 +30,19 @@ Posts.getByUser = user=>{
         .find({owner: user})
         .exec()
 }
+
+//Insert comment in Post
+Posts.insertNewComent = (id,newDoc)=>{
+    console.log("\""+newDoc.user+"\"") 
+    return Post
+        .update({_id:id}, {$push:{comments:newDoc}})
+        .exec()
+        
+}
+
+
 //Create new Posts
-Posts.insertNew = newDoc=>{
+Posts.insertNew = newDoc=>{ 
     return Post
         .create(newDoc)
 }

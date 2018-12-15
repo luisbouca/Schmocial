@@ -90,4 +90,20 @@ router.post('/insertPost', verifyAuth, function (req, res) {
 });
 
 
+router.post('/posts/comment/', verifyAuth, function (req, res) {
+  var comment = {
+    message:req.body.comment,
+    user:req.user._id+":"+req.user.name,
+    date:Date.now()
+  } 
+  axios.post('http://localhost:3000/api/posts/comment/'+req.body.id, comment)
+    .then(resposta => {
+      console.log(resposta.data) 
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
+    })
+
+});
+
 module.exports = router;
