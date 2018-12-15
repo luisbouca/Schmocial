@@ -6,6 +6,7 @@ const Posts = module.exports
 Posts.list = ()=>{
     return Post
         .find({})
+        .sort({_id:-1}) 
         .exec()
 }
 

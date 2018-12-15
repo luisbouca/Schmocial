@@ -115,55 +115,24 @@ block content
 									input.w3-input.w3-boarder.w3-light-grey(type='file', name="ficheiro") 
 									br
 									input.w3-btn.w3-blue-grey(type="submit", value="Post") 
-				.w3-container.w3-card.w3-black.w3-round.w3-margin
-					br
-					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar2.png" alt="Avatar")
-					span.w3-right.w3-opacity 1 min
-					h4 John Doe
-					br
-					hr.w3-clear
-					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					.w3-row-padding( style="margin:0 -16px")
-						.w3-half
-							img.w3-margin-bottom(src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights")
-						.w3-half
-							img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%" alt="Nature")
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-up  Upvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-down  Downvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-comment  Comment
-				.w3-container.w3-card.w3-black.w3-round.w3-margin
-					br
-					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar5.png" alt="Avatar")
-					span.w3-right.w3-opacity 16 min
-					h4 Jane Doe
-					br
-					hr.w3-clear
-					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-up  Upvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-down  Downvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-comment  Comment
-				.w3-container.w3-card.w3-black.w3-round.w3-margin
-					br
-					img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
-					span.w3-right.w3-opacity 32 min
-					h4 Angie Jane
-					br
-					hr.w3-clear
-					p Have you seen this?
-					img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%")
-					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-up  Upvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-chevron-down  Downvote
-					button.w3-button.w3-margin-bottom(type="button")
-						i.fa.fa-comment  Comment
+				each p in posts				
+					.w3-container.w3-card.w3-black.w3-round.w3-margin
+						br
+						img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+						span.w3-right.w3-opacity 32 min
+						h4 Angie Jane
+						br
+						hr.w3-clear
+						p= p.title
+						if p.picture
+							img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
+						p= p.content
+						button.w3-button.w3-margin-bottom(type="button")
+							i.fa.fa-chevron-up  Upvote
+						button.w3-button.w3-margin-bottom(type="button")
+							i.fa.fa-chevron-down  Downvote
+						button.w3-button.w3-margin-bottom(type="button")
+							i.fa.fa-comment  Comment 
 			//Right Column
 			.w3-col.m2
 				.w3-card.w3-round.w3-black.w3-center
