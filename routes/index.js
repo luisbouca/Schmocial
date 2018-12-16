@@ -28,8 +28,7 @@ router.get('/signin', function (req, res) {
 /* Login page.*/
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
-    .then(resposta => {
-      console.log(resposta.data)
+    .then(resposta => { 
       res.render('home', { posts: resposta.data })
     })
     .catch(erro => {

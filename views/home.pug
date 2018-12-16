@@ -123,8 +123,7 @@ block content
 						h4 Angie Jane
 						br
 						hr.w3-clear
-						p= p.title
-						input(type='hidden', id="idPost" value=p._id)
+						p= p.title 
 						if p.picture
 							img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
 						p= p.content
@@ -134,11 +133,11 @@ block content
 							i.fa.fa-chevron-down  Downvote
 						button.w3-button.w3-margin-bottom(type="button")
 							i.fa.fa-comment  Comment 
-						.w3-container.w3-card(id="commentSection") 
+						.w3-container.w3-card(class="commentSection" name=p._id) 
 							if p.comments
 								each m in p.comments
 									p= m.user.split(":")[1] + "        "+ m.message
-						textarea(id="NewComment", cols="80%", rows="1" placeholder="Enter a new comment")
+						textarea(id="NewComment", name=p._id, cols="80%", rows="1" placeholder="Enter a new comment")
 			//Right Column
 			.w3-col.m2
 				.w3-card.w3-round.w3-black.w3-center
