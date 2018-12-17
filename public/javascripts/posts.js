@@ -1,4 +1,7 @@
 $(()=>{
+    $('#addHashtag').click(function(){
+        $('#hashtagContainer').append('<input class=".w3-border.w3-padding" type="text" name="hashtags[]"></input>');
+    });
 
     $(document).on('keydown', function(e) {
         var targetInput = $(e.target);

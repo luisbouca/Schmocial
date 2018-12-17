@@ -111,33 +111,41 @@ block content
 								form.w3-container(action="/insertPost" method="POST" enctype="multipart/form-data")
 									h6.w3-opacity Schmocial post
 									p.w3-border.w3-padding 
-										input(type='text', name="descricao" placeholder="Status: Feeling Blue")
-									input.w3-input.w3-boarder.w3-light-grey(type='file', name="ficheiro") 
+										input(type='text' required style="width:80%" name="descricao" placeholder="Status: Feeling Blue") 
+									select(name="state")
+										option(value="private") Private
+										option(value="public") Public 
+									input.w3-input.w3-boarder.w3-light-grey(type='file', name="ficheiro")
+									.w3-container(id="hashtagContainer") 								
+										input.w3-border.w3-padding(type="text" name="hashtags[]" placeholder="Insert an hashtag")
+									button.w3-button.w3-margin-bottom(type="button" id="addHashtag") 
+										i.fa.fa-chevron-up  Add Hashtag
 									br
 									input.w3-btn.w3-blue-grey(type="submit", value="Post") 
-				each p in posts				
-					.w3-container.w3-card.w3-black.w3-round.w3-margin
-						br
-						img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
-						span.w3-right.w3-opacity 32 min
-						h4 Angie Jane
-						br
-						hr.w3-clear
-						p= p.title 
-						if p.picture
-							img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
-						p= p.content
-						button.w3-button.w3-margin-bottom(type="button")
-							i.fa.fa-chevron-up  Upvote
-						button.w3-button.w3-margin-bottom(type="button")
-							i.fa.fa-chevron-down  Downvote
-						button.w3-button.w3-margin-bottom(type="button")
-							i.fa.fa-comment  Comment 
-						.w3-container.w3-card(class="commentSection" name=p._id) 
-							if p.comments
-								each m in p.comments
-									p= m.user.split(":")[1] + "        "+ m.message
-						textarea(id="NewComment", name=p._id, cols="80%", rows="1" placeholder="Enter a new comment")
+				each p in posts
+					if p.state=="public"				
+						.w3-container.w3-card.w3-black.w3-round.w3-margin
+							br
+							img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+							span.w3-right.w3-opacity 32 min
+							h4 Angie Jane
+							br
+							hr.w3-clear
+							p= p.title 
+							if p.picture
+								img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
+							p= p.content
+							button.w3-button.w3-margin-bottom(type="button")
+								i.fa.fa-chevron-up  Upvote
+							button.w3-button.w3-margin-bottom(type="button")
+								i.fa.fa-chevron-down  Downvote
+							button.w3-button.w3-margin-bottom(type="button")
+								i.fa.fa-comment  Comment 
+							.w3-container.w3-card(class="commentSection" name=p._id) 
+								if p.comments
+									each m in p.comments
+										p= m.user.split(":")[1] + "        "+ m.message
+							textarea(id="NewComment", name=p._id, cols="80%", rows="1" placeholder="Enter a new comment")
 			//Right Column
 			.w3-col.m2
 				.w3-card.w3-round.w3-black.w3-center

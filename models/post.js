@@ -23,7 +23,7 @@ var postSchema = new schema({
     picture:{type: String},
     file:{type:String},
     state:{type:String},
-    hashtag:{type:String},
+    hashtags:[{type:String}],
     comments: [commentSchema],
     votes: voteSchema
     

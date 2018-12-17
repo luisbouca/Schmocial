@@ -42,8 +42,21 @@ router.get('/home', verifyAuth, function (req, res) {
 //Post routs
 
 router.post('/insertPost', verifyAuth, function (req, res) {
+
   var poste;
+  var hashtags = new Array()
   var form = new formidable.IncomingForm()
+  form
+  .on('field', function(field, value) {
+    if(field=='hashtags[]' && value!=""){
+      console.log("hashtag"+value)
+      hashtags.push(value)
+    }
+  })
+  .on('end', function() { 
+  console.log(hashtags)
+  });
+  
   form.parse(req, (erro, fields, files) => {
     if (!files.ficheiro.name) {
       poste = {
@@ -51,8 +64,10 @@ router.post('/insertPost', verifyAuth, function (req, res) {
         title: "teste",
         date: Date.now(),
         content: fields.descricao,
-        state: "privte"
+        state: fields.state,
+        hashtags:hashtags
       }
+      console.log(poste)
       axios.post('http://localhost:3000/api/posts', poste)
         .then(() => res.redirect('http://localhost:3000/'))
         .catch(erro => {
@@ -71,7 +86,8 @@ router.post('/insertPost', verifyAuth, function (req, res) {
             content: fields.descricao,
             picture: files.ficheiro.name,
             file: fnovo,
-            state: "privte"
+            state: fields.state,
+            hashtags:hashtags
           }
           axios.post('http://localhost:3000/api/posts', poste)
             .then(() => res.redirect('http://localhost:3000/'))

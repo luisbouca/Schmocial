@@ -90,7 +90,7 @@ router.get('/posts/comments/:id', (req, res)=>{
 
 //insert new Post
 router.post('/posts', (req, res)=>{
-    console.log(req.body)
+    console.log("API "+req.body.hashtags)
     Posts.insertNew(req.body)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
