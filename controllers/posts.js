@@ -10,6 +10,21 @@ Posts.list = ()=>{
         .exec()
 }
 
+//Returns Posts by hashtags
+Posts.listByHashtags = hashtags =>{
+    console.log("CHEGUEI" + hashtags.length)
+    
+    return Post
+        .find({hashtags:{$in:hashtags}})
+        .sort({_id:-1}) 
+        .exec()
+
+        return Post
+      .find({})
+      .sort({_id:-1}) 
+      .exec()
+}
+
 //Returns Comment list for post by id
 Posts.listComments = id=>{
     return Post
@@ -38,6 +53,18 @@ Posts.insertNewComent = (id,newDoc)=>{
         .update({_id:id}, {$push:{comments:newDoc}})
         .exec()
         
+}
+
+//List all Post Hashtags 
+Posts.listHashtags = ()=>{
+    return Post
+        .aggregate([{$unwind:"$hashtags"}, 
+        {$group:{_id:"$hashtags", count:{$sum:1}}},
+        {$sort:{count:-1}},
+        {$limit:5},
+        {$project: {_id:0, hashtags :"$_id", count:"$count"}}
+    ])
+        .exec()
 }
 
 

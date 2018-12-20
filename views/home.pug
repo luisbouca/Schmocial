@@ -81,19 +81,8 @@ block content
 				br
 				.w3-card.w3-round.w3-black.w3-hide-small
 					.w3-container
-						p Interests
-						p
-							span.w3-tag.w3-small.w3-hover-white News
-							span.w3-tag.w3-small.w3-hover-white W3Schools
-							span.w3-tag.w3-small.w3-hover-white Labels
-							span.w3-tag.w3-small.w3-hover-white Games
-							span.w3-tag.w3-small.w3-hover-white Friends
-							span.w3-tag.w3-small.w3-hover-white Games
-							span.w3-tag.w3-small.w3-hover-white Friends
-							span.w3-tag.w3-small.w3-hover-white Food
-							span.w3-tag.w3-small.w3-hover-white Design
-							span.w3-tag.w3-small.w3-hover-white Art
-							span.w3-tag.w3-small.w3-hover-white Photos
+						p Hashtags
+						p(id="hashtags") 
 				br
 				//Alert Box
 				.w3-container.w3-display-container.w3-round.w3-border.w3-margin-bottom.w3-hide-small.w3-black
@@ -121,32 +110,33 @@ block content
 									button.w3-button.w3-margin-bottom(type="button" id="addHashtag") 
 										i.fa.fa-chevron-up  Add Hashtag
 									br
-									input.w3-btn.w3-blue-grey(type="submit", value="Post") 
-				each p in posts
-					if p.state=="public"				
-						.w3-container.w3-card.w3-black.w3-round.w3-margin
-							br
-							img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
-							span.w3-right.w3-opacity 32 min
-							h4 Angie Jane
-							br
-							hr.w3-clear
-							p= p.title 
-							if p.picture
-								img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
-							p= p.content
-							button.w3-button.w3-margin-bottom(type="button")
-								i.fa.fa-chevron-up  Upvote
-							button.w3-button.w3-margin-bottom(type="button")
-								i.fa.fa-chevron-down  Downvote
-							button.w3-button.w3-margin-bottom(type="button")
-								i.fa.fa-comment  Comment 
-							.w3-container.w3-card(class="commentSection" name=p._id) 
-								if p.comments
-									each m in p.comments
-										p= m.user.split(":")[1] + "        "+ m.message
-							textarea(id="NewComment", name=p._id, cols="80%", rows="1" placeholder="Enter a new comment")
-			//Right Column
+									input.w3-btn.w3-blue-grey(type="submit", value="Post")  
+				.w3-col.m12(id="conteudoPosts")
+					each p in posts
+						if p.state=="public"			
+							.w3-container.w3-card.w3-black.w3-round.w3-margin
+								br
+								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+								span.w3-right.w3-opacity 32 min
+								h4 Angie Jane
+								br
+								hr.w3-clear
+								p= p.title 
+								if p.picture
+									img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
+								p= p.content
+								button.w3-button.w3-margin-bottom(type="button")
+									i.fa.fa-chevron-up  Upvote
+								button.w3-button.w3-margin-bottom(type="button")
+									i.fa.fa-chevron-down  Downvote
+								button.w3-button.w3-margin-bottom(type="button")
+									i.fa.fa-comment  Comment 
+								.w3-container.w3-card(class="commentSection" name=p._id) 
+									if p.comments
+										each m in p.comments
+												p= m.user.split(":")[1] + "        "+ m.message
+								textarea(id="NewComment", name=p._id, cols="80%", rows="1" placeholder="Enter a new comment")
+				//Right Column
 			.w3-col.m2
 				.w3-card.w3-round.w3-black.w3-center
 					.w3-container

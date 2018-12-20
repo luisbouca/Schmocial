@@ -28,7 +28,7 @@ router.get('/signin', function (req, res) {
 /* Login page.*/
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
-    .then(resposta => { 
+    .then(resposta => {  
       res.render('home', { posts: resposta.data })
     })
     .catch(erro => {
@@ -40,6 +40,33 @@ router.get('/home', verifyAuth, function (req, res) {
 
 
 //Post routs
+
+//Get hashtags
+router.get('/posts/hashtags', verifyAuth, function (req, res) {
+ 
+  axios.get('http://localhost:3000/api/posts/hashtags')
+    .then(resposta => {
+      res.render('hashtags', {lista:resposta.data})
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
+    })
+
+});
+
+//Get posts filtered // Esta route acho que nao esta a ser usada xD
+router.post('/posts/filter', verifyAuth, function (req, res) {
+ 
+  console.log("OPEE"+req.body)
+  axios.get('http://localhost:3000/api/posts/filter/'+req.body.hashtags)
+    .then(resposta => {
+      res.render('home', { posts: resposta.data })
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
+    })
+
+});
 
 router.post('/insertPost', verifyAuth, function (req, res) {
 

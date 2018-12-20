@@ -69,7 +69,15 @@ router.post('/events', (req, res)=>{
 
 //get all posts
 router.get('/posts', (req, res)=>{
+    console.log("Chegueii POST")
     Posts.list()
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//get all hashtags
+router.get('/posts/hashtags', (req, res)=>{ 
+    Posts.listHashtags()
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
@@ -83,6 +91,7 @@ router.get('/posts/:tittle', (req, res)=>{
 
 //get post comment
 router.get('/posts/comments/:id', (req, res)=>{
+    console.log("COMENTARIO")
     Posts.listComments(req.params.id)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
@@ -100,6 +109,14 @@ router.post('/posts', (req, res)=>{
 router.post('/posts/comment/:id', (req, res)=>{
     console.log("Recebi pedido comentario+"+req.body.comment) 
     Posts.insertNewComent(req.params.id,req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//insert new comment on Post
+router.post('/posts/filter/', (req, res)=>{
+    console.log("Recebi pedido comentario+"+req.body.hashtags) 
+    Posts.listByHashtags(req.body.hashtags)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
