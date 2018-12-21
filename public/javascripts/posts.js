@@ -48,7 +48,11 @@ $(() => {
     $('#hashtags').load('http://localhost:3000/posts/hashtags');
 
     $('#addHashtag').click(function () {
-        $('#hashtagContainer').append('<input class="w3-border w3-padding" type="text" name="hashtags[]"></input>');
+        $('#hashtagContainer').append('<input class="w3-padding w3-round-xxlarge" style="width:26%" type="text" placeholder="Insert an hashtag" name="hashtags[]"></input>');
+    });
+
+    $('#removeHashtag').click(function () {
+        $('#hashtagContainer input:last-child').remove()
     });
 
     $(document).on('keydown', function (e) {
