@@ -55,6 +55,14 @@ Posts.insertNewComent = (id,newDoc)=>{
         
 }
 
+//Insert vote in Post
+Posts.insertNewVote = (user,post)=>{ 
+    return Post
+        .update({_id:post}, {$push:{votes:user}})
+        .exec()
+        
+}
+
 //List all Post Hashtags 
 Posts.listHashtags = ()=>{
     return Post

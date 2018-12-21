@@ -113,10 +113,17 @@ router.post('/posts/comment/:id', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
-//insert new comment on Post
+//Filter by hashtags
 router.post('/posts/filter/', (req, res)=>{
     console.log("Recebi pedido comentario+"+req.body.hashtags) 
     Posts.listByHashtags(req.body.hashtags)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//Add new vote
+router.post('/posts/vote/', (req, res)=>{ 
+    Posts.insertNewVote(req.body.user, req.body.post)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })

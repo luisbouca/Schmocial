@@ -44,6 +44,17 @@ function guardaHashtags(teste) {
     });
 }
 
+function voteFunc(user,post){ 
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:3000/posts/vote",
+            data: JSON.stringify({ user: user, post: post }),
+            dataType: "json"
+        })
+    
+}
+
 $(() => {
     $('#hashtags').load('http://localhost:3000/posts/hashtags');
 

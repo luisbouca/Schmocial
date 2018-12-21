@@ -29,7 +29,7 @@ router.get('/signin', function (req, res) {
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
     .then(resposta => {  
-      res.render('home', { posts: resposta.data })
+      res.render('home', { posts: resposta.data, username:req.user._id })
     })
     .catch(erro => {
       console.log('Erro ao carregar da bd')
@@ -139,6 +139,17 @@ router.post('/posts/comment/', verifyAuth, function (req, res) {
     date:Date.now()
   } 
   axios.post('http://localhost:3000/api/posts/comment/'+req.body.id, comment)
+    .then(resposta => {
+      console.log(resposta.data) 
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
+    })
+
+});
+
+router.post('/posts/vote/', verifyAuth, function (req, res) { 
+  axios.post('http://localhost:3000/api/posts/vote/',req.body)
     .then(resposta => {
       console.log(resposta.data) 
     })

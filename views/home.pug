@@ -130,7 +130,10 @@ block content
 								if p.picture
 									img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
 								p= p.content
-								button.w3-button.w3-margin-bottom(type="button")
+								if p.votes
+									p.w3-input.w3-margin-bottom= p.votes.length    
+										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px;') 
+								button.w3-button.w3-margin-bottom(type="button" onclick="voteFunc('"+username+"', '"+p._id+"')")
 									i.fa.fa-chevron-up  Upvote
 								button.w3-button.w3-margin-bottom(type="button")
 									i.fa.fa-chevron-down  Downvote 

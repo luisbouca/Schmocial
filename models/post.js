@@ -25,7 +25,7 @@ var postSchema = new schema({
     state:{type:String},
     hashtags:[{type:String}],
     comments: [commentSchema],
-    votes: voteSchema
+    votes: [{type:String}]
     
 })
 
