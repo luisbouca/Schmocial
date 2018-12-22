@@ -1,2 +1,2 @@
 each h in lista
-    span.w3-tag.w3-small.w3-hover-white(onclick="guardaHashtags(this.innerHTML)")= h.hashtags
+    .w3-container.w3-hover-white(style="display:inline-block; cursor: pointer;" id=h.hashtags name="stand-by" onclick="filterHash(this.innerHTML)")= h.hashtags    
