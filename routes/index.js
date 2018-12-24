@@ -25,7 +25,7 @@ router.get('/signin', function (req, res) {
   res.render('login', { title: 'Welcome to Schmocial' });
 });
 
-/* Login page.*/
+/* Home page.*/
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
     .then(resposta => {  
@@ -34,6 +34,25 @@ router.get('/home', verifyAuth, function (req, res) {
     .catch(erro => {
       console.log('Erro ao carregar da bd')
       res.render('error', { error: erro, message: 'Erro ao carregar da bd' })
+    })
+
+});
+
+//Connects Routes
+router.get('/friends', verifyAuth, function (req, res) { 
+  res.render('connections', { username_id:req.user._id, username_name:req.user.name })
+});
+
+//Request friendship
+router.post('/friends/new', verifyAuth, function (req, res) {
+ 
+  console.log("OPEE"+req.body)
+  axios.get('http://localhost:3000/api/friends/new/')
+    .then(resposta => {
+      res.render('home', { posts: resposta.data })
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
     })
 
 });

@@ -10,6 +10,12 @@ var addressSchema = new schema({
     city: {type: String}
 })
 
+var friendSchema = new schema({
+    id: {type: String},
+    name:{type:String},
+    state: {type: String}
+})
+
 var UserSchema = new schema({
     name: {type: String, required:true},
     username: {type: String, required:true},
@@ -17,6 +23,7 @@ var UserSchema = new schema({
     email: {type: String, required:true},
     age: {type: String},
     gender: {type: String},
+    friends:[friendSchema],
     address: addressSchema
 })
 

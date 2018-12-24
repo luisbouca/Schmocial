@@ -12,7 +12,7 @@ Users.list = ()=>{
 //Returns User by name
 Users.getByName = name=>{
     return User
-        .findOne({name: name})
+        .find({name: name})
         .exec()
 }
 
@@ -20,6 +20,20 @@ Users.getByName = name=>{
 Users.getById = id=>{
     return User
         .findOne({_id: id})
+        .exec()
+}
+
+//Insert New Friend 
+Users.insertNewFriend = newFriend=>{
+    return User
+        .updateOne({_id:newFriend.userDest}, {$push:{friends:newFriend.userOrigin}})
+        .exec()
+}
+
+//Insert New Friend 
+Users.getFriends = id=>{
+    return User
+        .find({_id: id}, {_id:0,friends:1})
         .exec()
 }
 

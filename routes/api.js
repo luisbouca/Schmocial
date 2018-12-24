@@ -128,7 +128,16 @@ router.post('/posts/vote/', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//New Friend Request
+router.post('/friends/new/', (req, res)=>{ 
+    Users.insertNewFriend(req.body)
+    .then(dados => res.jsonp(dados))
+})
 
-
+//Get Friends
+router.get('/friends/get/:id', (req, res)=>{ 
+    Users.getFriends(req.params.id)
+    .then(dados => res.jsonp(dados))
+})
 
 module.exports = router;

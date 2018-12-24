@@ -1,3 +1,7 @@
+var currentUser
+function getUser(user) {
+    currentUser=user
+  }
 var hashs = new Array()//array onde irão estar as hashtags
 function filterHash(teste) {
     var url
@@ -68,10 +72,6 @@ function filterHash(teste) {
     });
 }
 
-var currentUser
-function getUser(user) {
-    currentUser=user
-  }
 function voteFunc(user,post){  
         var result = $('#'+''+post+'').text()
         $.ajax({
