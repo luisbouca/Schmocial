@@ -29,7 +29,20 @@ router.get('/signin', function (req, res) {
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
     .then(resposta => {  
-      res.render('home', { posts: resposta.data, username:req.user._id })
+      res.render('home', { posts: resposta.data, username:req.user._id, utilizador:req.user })
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd')
+      res.render('error', { error: erro, message: 'Erro ao carregar da bd' })
+    })
+
+});
+
+/* Profile page.*/
+router.get('/profile/:id', verifyAuth, function (req, res) {
+  axios.get('http://localhost:3000/api/posts/user/'+req.params.id)
+    .then(resposta => {  
+      res.render('profile', { posts: resposta.data, username:req.user._id, utilizador:req.user })
     })
     .catch(erro => {
       console.log('Erro ao carregar da bd')
@@ -106,9 +119,9 @@ router.post('/insertPost', verifyAuth, function (req, res) {
   form.parse(req, (erro, fields, files) => {
     if (!files.ficheiro.name) {
       poste = {
-        owner: req.user._id,
+        owner: req.user._id+":"+req.user.name,
         title: "teste",
-        date: Date.now(),
+        date: new Date(),
         content: fields.descricao,
         state: fields.state,
         hashtags:hashtags
@@ -126,9 +139,9 @@ router.post('/insertPost', verifyAuth, function (req, res) {
       fs.rename(fenviado, fnovo, erro => {
         if (!erro) {
           poste = {
-            owner: req.user._id,
+            owner: req.user._id+":"+req.user.name,
             title: "teste",
-            date: Date.now(),
+            date: new Date(),
             content: fields.descricao,
             picture: files.ficheiro.name,
             file: fnovo,

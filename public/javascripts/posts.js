@@ -2,6 +2,7 @@ var currentUser
 function getUser(user) {
     currentUser=user
   }
+  //Filtro de posts por hashtags
 var hashs = new Array()//array onde irão estar as hashtags
 function filterHash(teste) {
     var url
@@ -55,7 +56,7 @@ function filterHash(teste) {
                     } 
                     myvar = myvar + '<div class="w3-container w3-card w3-black w3-round w3-margin"><br/>' +
                         '<img class="w3-left w3-circle w3-margin-right" style="width:60px;" src="/w3images/avatar6.png" alt="Avatar" /><span class="w3-right w3-opacity">32 min</span>' +
-                        '    <h4>Angie Jane</h4><br/>' +
+                        '    <h4>'+data[i].owner.split(":")[1]+'</h4><br/>' +
                         '    <hr class="w3-clear" />' +
                         '    <p>' + data[i].title + '</p>' + pic + '<p>' + data[i].content + '</p><div class="w3-card w3-black" style="display: inline;">'+
                         '    <p class="w3-margin-bottom" id=' + data[i]._id + ' style="display: inline;">'+data[i].votes.length+' </p><i class="far fa-thumbs-up" style="font-size:24px; padding: 5px; display: inline;"></i></div><button class="w3-button w3-margin-bottom" type="button" id="teste" onclick="voteFunc('+currentUser+', '+data[i]._id+')"><i class="fa fa-chevron-up"> Upvote</i></button><button class="w3-button w3-margin-bottom" type="button"><i class="fa fa-chevron-down"> Downvote</i></button><button class="w3-button w3-margin-bottom"' +
@@ -72,6 +73,37 @@ function filterHash(teste) {
     });
 }
 
+function fuck(id){
+    var estado = $('#currentState'+id +' option:selected' ).val()
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:3000/api/posts/update",
+        data: JSON.stringify({ id: id, estado:estado}),
+        dataType: "json",
+        success: function () {
+            window.location.href = "http://localhost:3000/home"
+        }
+    }) 
+}
+
+
+//Apagar um post
+function erasePost(id){
+    alert(id)
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:3000/api/posts/remove",
+        data: JSON.stringify({ id: id}),
+        dataType: "json",
+        success: function () {
+            window.location.href = "http://localhost:3000/home"
+        }
+    }) 
+}
+
+//Iserção de voto
 function voteFunc(user,post){  
         var result = $('#'+''+post+'').text()
         $.ajax({
@@ -96,7 +128,7 @@ $(() => {
     $('#removeHashtag').click(function () {
         $('#hashtagContainer input:last-child').remove()
     });
-
+//Inserir comentario
     $(document).on('keydown', function (e) {
         var targetInput = $(e.target);
         if (targetInput.is('textarea')) {

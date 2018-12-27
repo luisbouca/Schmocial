@@ -1,5 +1,23 @@
 
 $(() => {
+ 
+//get friends request and display in page
+$.ajax({
+    type: "GET",
+    contentType: "application/json",
+    url: "http://localhost:3000/api/friends/get/"+$("#userId").attr('name'),
+    dataType: "json",
+    success: function (data) {   
+        $("#friendsContainer").html('')
+var myvar = '<p>Friend Request:</p><span>'+data[0].friends[0].name+'</span>'+
+'<div class="w3-row w3-opacity">'+
+'    <div class="w3-half"><button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button></div>'+
+'    <div class="w3-half"><button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-times"></i></button></div>'+
+'</div>'; 
+$("#friendsContainer").append(myvar)
+    }
+})
+
 
     //load all users into the page
     $.ajax({
@@ -102,23 +120,6 @@ var myvar = '<div class="container">'+
         }
     })
 }); 
-
-//get friends request and display in page
-$.ajax({
-    type: "GET",
-    contentType: "application/json",
-    url: "http://localhost:3000/api/friends/get/"+currentUser,
-    dataType: "json",
-    success: function (data) {   
-        $("#friendsContainer").html('')
-var myvar = '<p>Friend Request:</p><span>'+data[0].friends[0].name+'</span>'+
-'<div class="w3-row w3-opacity">'+
-'    <div class="w3-half"><button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button></div>'+
-'    <div class="w3-half"><button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-times"></i></button></div>'+
-'</div>'; 
-$("#friendsContainer").append(myvar)
-    }
-})
 
 
 

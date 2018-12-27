@@ -11,7 +11,7 @@ block content
 				i Schmocial
 			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-globe
-			a(href="/profile/"+username+":"+utilizador.name title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+			a(href="#" title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-user
 			a(href="#" title="Messages").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-envelope
@@ -78,12 +78,7 @@ block content
 									img.w3-margin-bottom(src="/w3images/nature.jpg" style="width:100%")
 								.w3-half
 									img.w3-margin-bottom(src="/w3images/snow.jpg" style="width:100%")
-				br
-				.w3-card.w3-round.w3-black.w3-hide-small
-					.w3-container
-						p Hashtags
-						p(id="hashtags") 
-				br
+				br 
 				//Alert Box
 				.w3-container.w3-display-container.w3-round.w3-border.w3-margin-bottom.w3-hide-small.w3-black
 					span.w3-button.w3-display-topright(onclick="this.parentElement.style.display='none'")
@@ -117,55 +112,43 @@ block content
 									br
 									input.w3-btn.w3-blue-grey(type="submit", value="Post")  
 				.w3-col.m12(id="conteudoPosts")
-					each p in posts
-						if p.state=="public"			
-							.w3-container.w3-card.w3-black.w3-round.w3-margin
-								br
-								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
-								span.w3-right.w3-opacity 32 min
-								h4= p.owner.split(":")[1]
-								br
-								hr.w3-clear
-								p= p.title 
-								if (p.picture)
-									img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
-								p= p.content
-								if p.votes
-									.w3-card.w3-black(style="display: inline")
-										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
-										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')   
-								button.w3-button.w3-margin-bottom(type="button" id="teste" onclick="voteFunc('"+username+"', '"+p._id+"')")
-									i.fa.fa-chevron-up  Upvote
-								button.w3-button.w3-margin-bottom(type="button")
-									i.fa.fa-chevron-down  Downvote 
-								button.w3-button.w3-margin-bottom(type="button")
-									i.fa.fa-comment  Comment 
-								.w3-container.w3-card(class="commentSection" name=p._id) 
-									if p.comments
-										each m in p.comments
-												p= m.user.split(":")[1] + "        "+ m.message
-								textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="77%", rows="1" placeholder="Enter a new comment")
-				//Right Column
-			.w3-col.m2
-				.w3-card.w3-round.w3-black.w3-center
-					.w3-container
-						p Upcoming Events:
-						img(src="/w3images/forest.jpg" alt="Forest" style="width:100%;")
-						p
-							strong Holiday
-						p Friday 15:00
-						p
-							button.w3-button.w3-block.w3-white Info
-				br
-				.w3-card.w3-round.w3-black.w3-center
-					.w3-container(id="friendsContainer") 
-				br
-				.w3-card.w3-round.w3-black.w3-padding-16.w3-center
-					p ADS
-				br
-				.w3-card.w3-round.w3-black.w3-padding-32.w3-center
-					p
-						i.fa.fa-bug.w3-xxlarge
-
+					each p in posts			
+						.w3-container.w3-card.w3-black.w3-round.w3-margin
+							br
+							img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+							span.w3-right.w3-opacity 32 min
+							br
+							button.w3-right(onclick="erasePost('"+p._id+"')") 
+								i.fas.fa-trash Erase Post   
+							h4= p.owner.split(":")[1]
+							br
+							hr.w3-clear
+							p(style="display:inline-block;")= p.title 
+							select.w3-right(id="currentState"+p._id onchange="fuck('"+p._id+"');" style="display:inline-block;")
+								if p.state == 'public'
+									option(value="public" selected="selected") Public
+									option(value="private") Private
+								else if p.state == 'private'
+									option(value="public") Public
+									option(value="private" selected="selected") Private
+							if (p.picture)
+								img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
+							p= p.content
+							if p.votes
+								.w3-card.w3-black(style="display: inline")
+									p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
+									i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')   
+							button.w3-button.w3-margin-bottom(type="button" id="teste" onclick="voteFunc('"+username+"', '"+p._id+"')")
+								i.fa.fa-chevron-up  Upvote
+							button.w3-button.w3-margin-bottom(type="button")
+								i.fa.fa-chevron-down  Downvote 
+							button.w3-button.w3-margin-bottom(type="button")
+								i.fa.fa-comment  Comment 
+							.w3-container.w3-card(class="commentSection" name=p._id) 
+								if p.comments
+									each m in p.comments
+											p= m.user.split(":")[1] + "        "+ m.message
+							textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="77%", rows="1" placeholder="Enter a new comment")
+				//Right Column 
 		footer.w3-container.w3-black
 			address Copyright@Schmocial 2018

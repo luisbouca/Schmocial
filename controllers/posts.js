@@ -75,6 +75,20 @@ Posts.listHashtags = ()=>{
         .exec()
 }
 
+//Update status Post
+Posts.updatePost = info=>{
+    return Post
+        .update({_id:info.id},
+            {$set:{state:info.estado}})
+            .exec()
+}
+
+//Remove Post
+Posts.removePost = id=>{
+    return Post
+        .remove({_id:id})
+        .exec()
+}
 
 //Create new Posts
 Posts.insertNew = newDoc=>{ 

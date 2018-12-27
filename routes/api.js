@@ -89,6 +89,12 @@ router.get('/posts/:tittle', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//get user posts
+router.get('/posts/user/:id', (req, res)=>{
+    Posts.getByUser(req.params.id)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
 //get post comment
 router.get('/posts/comments/:id', (req, res)=>{
     console.log("COMENTARIO")
@@ -96,6 +102,21 @@ router.get('/posts/comments/:id', (req, res)=>{
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
+
+//update status post
+router.post('/posts/update/', (req, res)=>{
+    Posts.updatePost(req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//remove post by id
+router.post('/posts/remove/', (req, res)=>{
+    Posts.removePost(req.body.id)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
 
 //insert new Post
 router.post('/posts', (req, res)=>{
