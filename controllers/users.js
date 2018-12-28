@@ -30,10 +30,26 @@ Users.insertNewFriend = newFriend=>{
         .exec()
 }
 
-//Insert New Friend 
+//Get Friend 
 Users.getFriends = id=>{
     return User
-        .find({_id: id}, {_id:0,friends:1})
+        .find({_id: id, "friends.state":"request"}, {_id:0,friends:1})
+        .exec()
+}
+
+//Accept Friend 
+Users.acceptFriend = info=>{
+    return User
+        .updateOne({_id:info.user}, {$push:{friends:info.friend}})
+        .exec()
+}
+
+//Decline Friend 
+Users.deleteFriend = info=>{
+    console.log("OLAAAAAAA "+info.user)
+    return User
+        .update({_id: info.user},
+            { $pull: { "friends" : { id: info.friend } } })
         .exec()
 }
 

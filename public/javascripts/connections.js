@@ -2,6 +2,7 @@
 $(() => {
  
 //get friends request and display in page
+var friends
 $.ajax({
     type: "GET",
     contentType: "application/json",
@@ -9,17 +10,22 @@ $.ajax({
     dataType: "json",
     success: function (data) {   
         $("#friendsContainer").html('')
+        if(data.length!=0){
+            friends = data[0].friends  
 var myvar = '<p>Friend Request:</p><span>'+data[0].friends[0].name+'</span>'+
 '<div class="w3-row w3-opacity">'+
-'    <div class="w3-half"><button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button></div>'+
-'    <div class="w3-half"><button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-times"></i></button></div>'+
+'    <div class="w3-half"><button class="w3-button w3-block w3-green w3-section decision" name="accept" value="'+data[0].friends[0].id+':'+data[0].friends[0].name+'" title="Accept"><i class="fa fa-check"></i></button></div>'+
+'    <div class="w3-half"><button class="w3-button w3-block w3-red w3-section decision" name="dennied" value="'+data[0].friends[0].id+':'+data[0].friends[0].name+'" title="Decline"><i class="fa fa-times"></i></button></div>'+
 '</div>'; 
+}else{
+    var myvar = '<p>Friend Request:</p><span>You have no friends request</span>'
+}
 $("#friendsContainer").append(myvar)
     }
 })
 
 
-    //load all users into the page
+    //load all users into the connections page
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -121,6 +127,40 @@ var myvar = '<div class="container">'+
     })
 }); 
 
+
+//accepts/dennies friendship request
+$('body').on('click', 'button.decision', function() {  
+    var op = $(this).attr("name")
+    var userToUpdate
+    var infoFriend
+    var url
+    var user = $("#userId").attr('name') 
+    var res  = $(this).val().split(":")
+    if(op=="accept"){
+        url = "http://localhost:3000/api/friends/accept/"
+        userToUpdate = res[0]
+        infoFriend = {
+            id : user,
+            name : $("#userId").text(),
+            state : "accepted"
+        }
+    }else{ 
+        userToUpdate = user
+        infoFriend = res[0]
+        url = "http://localhost:3000/api/friends/delete/"
+    }
+    alert(infoFriend.id)
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: url,
+        data: JSON.stringify({user:userToUpdate, friend:infoFriend}),
+        dataType: "json",
+        success: function (data) { 
+            window.location.href = "http://localhost:3000/home"
+        }
+    })
+}); 
 
 
 

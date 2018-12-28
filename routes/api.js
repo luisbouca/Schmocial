@@ -155,6 +155,18 @@ router.post('/friends/new/', (req, res)=>{
     .then(dados => res.jsonp(dados))
 })
 
+//Accept friend
+router.post('/friends/accept/', (req, res)=>{ 
+    Users.acceptFriend(req.body)
+    .then(dados => res.jsonp(dados))
+})
+
+//Delete friend
+router.post('/friends/delete/', (req, res)=>{ 
+    Users.deleteFriend(req.body)
+    .then(dados => res.jsonp(dados))
+})
+
 //Get Friends
 router.get('/friends/get/:id', (req, res)=>{ 
     Users.getFriends(req.params.id)
