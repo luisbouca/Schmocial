@@ -3,6 +3,7 @@ var router = express.Router();
 var axios = require('axios')
 var fs = require('fs')
 var formidable = require('formidable')
+var moment = require('moment');
 
 /* Home page. */
 router.get('/', function (req, res) {
@@ -28,7 +29,7 @@ router.get('/signin', function (req, res) {
 /* Home page.*/
 router.get('/home', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts')
-    .then(resposta => {  
+    .then(resposta => {   
       res.render('home', { posts: resposta.data, username:req.user._id, utilizador:req.user })
     })
     .catch(erro => {
@@ -121,7 +122,7 @@ router.post('/insertPost', verifyAuth, function (req, res) {
       poste = {
         owner: req.user._id+":"+req.user.name,
         title: "teste",
-        date: new Date(),
+        date: moment().format("YYYY-MM-DD HH:mm:ss"),
         content: fields.descricao,
         state: fields.state,
         hashtags:hashtags
@@ -141,7 +142,7 @@ router.post('/insertPost', verifyAuth, function (req, res) {
           poste = {
             owner: req.user._id+":"+req.user.name,
             title: "teste",
-            date: new Date(),
+            date: moment().format("YYYY-MM-DD HH:mm:ss"),
             content: fields.descricao,
             picture: files.ficheiro.name,
             file: fnovo,
@@ -168,7 +169,7 @@ router.post('/posts/comment/', verifyAuth, function (req, res) {
   var comment = {
     message:req.body.comment,
     user:req.user._id+":"+req.user.name,
-    date:Date.now()
+    date:moment().format("YYYY-MM-DD HH:mm:ss")
   } 
   axios.post('http://localhost:3000/api/posts/comment/'+req.body.id, comment)
     .then(resposta => {

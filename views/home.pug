@@ -122,14 +122,13 @@ block content
 							.w3-container.w3-card.w3-black.w3-round.w3-margin
 								br
 								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
-								span.w3-right.w3-opacity 32 min
+								span.w3-right.w3-opacity= p.date
 								h4= p.owner.split(":")[1]
 								br
 								hr.w3-clear
-								p= p.title 
+								p= p.content
 								if (p.picture)
 									img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
-								p= p.content
 								if p.votes
 									.w3-card.w3-black(style="display: inline")
 										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
@@ -143,7 +142,9 @@ block content
 								.w3-container.w3-card(class="commentSection" name=p._id) 
 									if p.comments
 										each m in p.comments
-												p= m.user.split(":")[1] + "        "+ m.message
+												p.w3-padding.w3-round-large.w3-light-grey 
+													span(style="color:blue; font-weight: bold")= m.user.split(":")[1]
+													span(style="margin-left:1%")= m.message
 								textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="77%", rows="1" placeholder="Enter a new comment")
 				//Right Column
 			.w3-col.m2(style="position:sticky; top:0;")

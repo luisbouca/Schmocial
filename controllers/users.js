@@ -39,8 +39,12 @@ Users.getFriends = id=>{
 
 //Accept Friend 
 Users.acceptFriend = info=>{
-    return User
+        User
         .updateOne({_id:info.user}, {$push:{friends:info.friend}})
+        .exec()
+
+        return User
+        .updateOne({_id:info.friend.id, "friends.id":info.user}, {$set:{"friends.$.state":"accepted"}})
         .exec()
 }
 
