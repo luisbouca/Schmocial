@@ -52,6 +52,19 @@ router.get('/profile/:id', verifyAuth, function (req, res) {
 
 });
 
+/* Event page */
+router.get('/events', verifyAuth, function (req, res) {
+  axios.get('http://localhost:3000/api/events/'+req.params.id)
+    .then(resposta => {  
+      res.render('events', { events: resposta.data, utilizador:req.user })
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd')
+      res.render('error', { error: erro, message: 'Erro ao carregar da bd' })
+    })
+
+});
+
 //Connects Routes
 router.get('/friends', verifyAuth, function (req, res) { 
   res.render('connections', { username_id:req.user._id, username_name:req.user.name })

@@ -1,0 +1,103 @@
+extends layout
+
+block content
+	//navbar
+	.w3-top
+		.w3-bar.w3-left-align.w3-large#navBar.w3-black
+			a.w3-bar-item.w3-button.w3-hover-black.w3-hide-medium.w3-hide-large.w3-right(href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu")
+				i.fa.fa-bars
+			a(href="/home").w3-bar-item.w3-button.w3-padding-large.w3-hover-white
+				i.fa.fa-home.w3-margin-right
+				i Schmocial
+			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-globe
+			a(href="#" title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-user
+			a(href="#" title="Messages").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-envelope
+			a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-padding-large.w3-hover-white(title="My Account")
+				img.w3-circle(src="/w3images/avatar2.png" style="height:23px;width:23px" alt="Avatar")
+			.w3-dropdown-hover-w3-hide-small
+				button.w3-button.w3-padding-large.w3-hover-white(title="Notifications")
+					i.fa.fa-bell
+					span.w3-badge.w3-right.w3-small.w3-white 3
+				.w3-dropdown-content.w3-card-4.w3-bar-block(style="width:300px")
+					a.w3-bar-item.w3-button(href="#") One new friend request
+					a.w3-bar-item.w3-button(href="#") John Doe posted on your wall
+					a.w3-bar-item.w3-button(href="#") Jane upvoted your post
+	//Grid
+	//Grid
+	.w3-container.w3-content(style="max-width:1400px;margin-top:80px")
+		.w3-row  
+			//Middle Column
+			.w3-col.m12
+				.w3-row-padding
+					.w3-col.m12
+						.w3-card.w3-round.w3-black
+							.w3-container.w3-padding
+								.w3-container.w3-border.w3-padding
+									input.w3-animate-input(type='text' id="search" required style="width:100%" name=username_id+":"+username_name placeholder="Status: Feeling Blue")  
+	.w3-container.w3-content(style="max-width:1400px;margin-top:80px")
+		.w3-row  
+			//Middle Column
+			.w3-col.m12
+				.w3-row-padding
+					.w3-col.m12
+						h1.w3 Upcoming Events
+						.w3-card.w3-round.w3-white
+							.w3-container.w3-padding
+								.w3-container.w3-border.w3-padding
+									.w3-col.m2
+										.w3-card.w3-round.w3-black.w3-center
+											.w3-container
+												p Add new Event
+												img(src="/w3images/forest.jpg" alt="Forest" style="width:100%;")
+												p
+													strong Holiday
+												p Friday 15:00
+												p
+													button.w3-button.w3-block.w3-white(onclick="document.getElementById('ticketModal').style.display='block'") Add
+										br 
+									.w3-col.m2
+										.w3-card.w3-round.w3-black.w3-center
+											.w3-container
+												p Upcoming Events:
+												img(src="/w3images/forest.jpg" alt="Forest" style="width:100%;")
+												p
+													strong Holiday
+												p Friday 15:00
+												p
+													button.w3-button.w3-block.w3-white(onclick="document.getElementById('ticketModal').style.display='block'") Info
+										br
+	.w3#ticketModal.w3-modal
+		.w3-modal-content.w3-animate-top.w3-card-4
+			header.w3-container.w3-black.w3-center.w3-padding-32
+				span.w3-button.w3-black.w3-xlarge.w3-display-topright(onclick="document.getElementById('ticketModal').style.display='none'") &times;
+				h2.w3-wide
+					i.fa.fa-suitcase.w3-margin-right
+					| Add new Event
+			.w3-container
+				p
+					label
+					i.fa.fa-shopping-cart
+					|  Local
+				input.w3-input.w3-border(type='text' id="inputLocation" placeholder='How many?')
+				p
+					label
+					i.fa.fa-user
+					|  Titulo
+				input.w3-input.w3-border(type='text' id="inputTitle" placeholder='Enter email')
+				p
+					label
+					i.fa.fa-user
+					|  Descrição
+				input.w3-input.w3-border(type='text' id="inputDescription" placeholder='Enter email')
+				button.w3-button.w3-block.w3-teal.w3-padding-16.w3-section.w3-right(onclick="submeteEvento();")
+					| Submit Event 
+					i.fa.fa-check
+				button.w3-button.w3-red.w3-section(onclick="document.getElementById('ticketModal').style.display='none'")
+					| Close 
+					i.fa.fa-remove
+				p.w3-right
+					| Need 
+					a.w3-text-blue(href='#') help?
