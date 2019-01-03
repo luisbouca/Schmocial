@@ -50,6 +50,13 @@ router.get('/events', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//get all events after today date
+router.get('/events/byDate', (req, res)=>{
+    Events.getByDate()
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
 //get events by name
 router.get('/events/:name', (req, res)=>{
     Events.getByTitle(req.params.name)

@@ -6,7 +6,7 @@ $(() => {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "http://localhost:3000/api/events/",
+        url: "http://localhost:3000/api/events/byDate/",
         dataType: "json",
         success: function (data) {
             $("#conteudoEventos").html('')
@@ -14,7 +14,8 @@ $(() => {
             if (eventos.length == 0) {
                 var myvar = '<div class="w3-container">' +
                     '    <p>Upcoming Events:</p>' +
-                    '    <p><strong>Não tem eventos próximos</strong></p>' +
+                    '    <p><strong>Não tem eventos próximos</strong></p>'+
+                    '    <p><a class="w3-button w3-block w3-white" href="/events">See more Events</a></p>' +
                     '</div>';
             } else {
                 for (i = 0; i < eventos.length; i++) {
@@ -33,7 +34,7 @@ $(() => {
                                 '    <p>Upcoming Events:</p>'+pic+'' +
                                 '    <p><strong>' + eventos[i].title + '</strong></p>' +
                                 '    <p>' + eventos[i].date + '</p>' +
-                                '    <p><button class="w3-button w3-block w3-white">Info</button></p>' +
+                                '    <p><a class="w3-button w3-block w3-white" href="/events">See more Events</a></p>' +
                                 '</div>';
                                 break;
                         }
@@ -43,6 +44,7 @@ $(() => {
                     var myvar = '<div class="w3-container">' +
                     '    <p>Upcoming Events:</p>' +
                     '    <p><strong>Não tem eventos próximos</strong></p>' +
+                    '    <p><a class="w3-button w3-block w3-white" href="/events">See more Events</a></p>' +
                     '</div>';
                 }
                 }
@@ -72,10 +74,12 @@ function showEventInfo(id, data, local, titulo, descricao, utilizador) {
             participantes = data[0].participants
             if (participantes.length != 0) {
                 for (i = 0; i < participantes.length; i++) {
-                    $("#eventoParticipants").append(participantes[i].name)
+                    $("#eventoParticipants").append(participantes[i].name) 
                     if (participantes[i].id == utilizador) {
                         $("#acceptEvent").hide();
                         break;
+                    }else{
+                        $("#acceptEvent").show();
                     }
                 }
             } else {

@@ -1,4 +1,5 @@
 var Event = require('../models/event')
+var moment = require('moment');
 
 const Events = module.exports
 
@@ -7,6 +8,14 @@ Events.list = ()=>{
     return Event
         .find({})
         .sort({date:1}) 
+        .exec()
+}
+
+//Returns Events after today date 
+Events.getByDate = ()=>{
+    return Event
+        .find({date: {$gte: moment().format("YYYY-MM-DD")}})
+        .sort({date:1})
         .exec()
 }
 
