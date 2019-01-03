@@ -117,6 +117,19 @@ router.get('/friends', verifyAuth, function (req, res) {
   res.render('connections', { username_id:req.user._id, username_name:req.user.name })
 });
 
+//Friends Profile
+router.get('/friends/:id', verifyAuth, function (req, res) {
+  axios.get('http://localhost:3000/api/posts/user/'+req.params.id)
+    .then(resposta => {  
+      res.render('friend', { posts: resposta.data, username:req.params.id.split(":")[1] })
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd')
+      res.render('error', { error: erro, message: 'Erro ao carregar da bd' })
+    })
+
+});
+
 //Request friendship
 router.post('/friends/new', verifyAuth, function (req, res) {
  

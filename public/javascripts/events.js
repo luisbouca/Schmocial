@@ -77,13 +77,16 @@ function showEventInfo(id, data, local, titulo, descricao, utilizador) {
                     $("#eventoParticipants").append(participantes[i].name) 
                     if (participantes[i].id == utilizador) {
                         $("#acceptEvent").hide();
+                        $("#cancelEvent").show();
                         break;
                     }else{
                         $("#acceptEvent").show();
+                        $("#cancelEvent").hide();
                     }
                 }
             } else {
                 $("#acceptEvent").show();
+                $("#cancelEvent").hide();
                 $("#eventoParticipants").text("Ainda não existem participantes")
             }
             $("#eventInfo").css("display", "block");
@@ -103,6 +106,21 @@ function submeteParticipacao(idUtilizador, nameUtilizador) {
         contentType: "application/json",
         url: "http://localhost:3000/api/events/participant",
         data: JSON.stringify({ idPost: idPost, participant: participante }),
+        dataType: "json",
+        success: function () {
+            window.location.href = "http://localhost:3000/home"
+        }
+    })
+}
+
+//cancela participaçao
+function cancelParticipacao(idUtilizador) { 
+    var idPost = $("#idDoEvento").text()
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:3000/api/events/participant/remove",
+        data: JSON.stringify({ idPost: idPost, participant: idUtilizador }),
         dataType: "json",
         success: function () {
             window.location.href = "http://localhost:3000/home"

@@ -1,0 +1,89 @@
+extends layout
+
+block content
+	//navbar
+	.w3-top
+		.w3-bar.w3-left-align.w3-large#navBar.w3-black
+			a.w3-bar-item.w3-button.w3-hover-black.w3-hide-medium.w3-hide-large.w3-right(href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu")
+				i.fa.fa-bars
+			a(href="/home").w3-bar-item.w3-button.w3-padding-large.w3-hover-white
+				i.fa.fa-home.w3-margin-right
+				i Schmocial
+			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-globe
+			a(href="#" title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-user
+			a(href="#" title="Messages").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+				i.fa.fa-envelope
+			a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-padding-large.w3-hover-white(title="My Account")
+				img.w3-circle(src="/w3images/avatar2.png" style="height:23px;width:23px" alt="Avatar")
+			.w3-dropdown-hover-w3-hide-small
+				button.w3-button.w3-padding-large.w3-hover-white(title="Notifications")
+					i.fa.fa-bell
+					span.w3-badge.w3-right.w3-small.w3-white 3
+				.w3-dropdown-content.w3-card-4.w3-bar-block(style="width:300px")
+					a.w3-bar-item.w3-button(href="#") One new friend request
+					a.w3-bar-item.w3-button(href="#") John Doe posted on your wall
+					a.w3-bar-item.w3-button(href="#") Jane upvoted your post
+	//Grid
+	.w3-container.w3-content(style="max-width:1400px;margin-top:80px")
+		.w3-row
+			//left Column
+			.w3-col.m3
+				//Profile
+				.w3-card.w3-round.w3-black
+					.w3-container
+						h4.w3-center= username
+						p.w3-center
+							img.w3-circle(src="/images/capa.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+						hr
+						p 
+							i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
+							p Designer, UI
+						p 
+							i.fa.fa-home.fa-fw.w3-margin-right.w3-text-theme
+							p Portugal
+						p 
+							i.fa.fa-birthday-cake.fa-fw.w3-margin-right.w3-text-theme
+							p= "20 years"
+				br
+			//Middle Column
+			if posts.length!=0
+				.w3-col.m7
+					.w3-col.m12(id="conteudoPosts")
+						each p in posts			
+							.w3-container.w3-card.w3-black.w3-round.w3-margin
+								br
+								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+								span.w3-right.w3-opacity 32 min
+								br  
+								h4= p.owner.split(":")[1]
+								br
+								hr.w3-clear
+								p(style="display:inline-block;")= p.title 
+								if (p.picture)
+									img.w3-margin-bottom(src="/images/"+p.picture style="width:100%")
+								p= p.content
+								if p.votes
+									.w3-card.w3-black(style="display: inline")
+										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
+										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')   
+								button.w3-button.w3-margin-bottom(type="button" id="teste" onclick="voteFunc('"+username+"', '"+p._id+"')")
+									i.fa.fa-chevron-up  Upvote
+								button.w3-button.w3-margin-bottom(type="button")
+									i.fa.fa-chevron-down  Downvote 
+								button.w3-button.w3-margin-bottom(type="button")
+									i.fa.fa-comment  Comment 
+								.w3-container.w3-card(class="commentSection" name=p._id) 
+									if p.comments
+										each m in p.comments
+												p= m.user.split(":")[1] + "        "+ m.message
+								textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="77%", rows="1" placeholder="Enter a new comment")
+					//Right Column 
+			else
+				.w3-col.m7
+					.w3-col.m12
+						.w3-container.w3-card.w3-black.w3-round.w3-margin
+							p(style="text-align:center") There is no posts to preview
+		footer.w3-container.w3-black
+			address Copyright@Schmocial 2018

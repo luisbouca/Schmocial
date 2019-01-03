@@ -32,8 +32,17 @@ var users
         url: "http://localhost:3000/api/users/",
         dataType: "json",
         success: function (data) {
-            users = data
-                for(i=0;i<data.length;i++){
+            users = data 
+            var res = $("#search").attr('name').split(":");
+                for(i=0;i<data.length;i++){ 
+                    var newHtml = '<button class="close w3-button w3-block w3-green w3-section" name='+data[i]._id+'>Send Request Friend</button>'
+                    if(data[i]._id!=res[0]){
+                        for(j=0;j<data[i].friends.length;j++){
+                            if(data[i].friends[j].id==res[0]){
+                                newHtml = '<p>You are already friends</p>'
+                            }
+
+                        }
 var myvar = 
 '  <div class="row">'+
 ''+
@@ -48,7 +57,7 @@ var myvar =
 '        </div>'+
 '        <div class="col-sm-2">'+
 '          <br>'+
-'          <button class="close" name='+data[i]._id+'>Send Request Friend</button>'+
+newHtml         +
 '        </div>'+
 '      </div>'+
 '      <div class="clearfix"></div>'+
@@ -59,6 +68,7 @@ var myvar =
             $("#listConnections").append(myvar)
         }
         }
+    }
     })
 
     //Filter Users by name
@@ -160,8 +170,9 @@ $('body').on('click', 'button.decision', function() {
         }
     })
 }); 
-
+//Mostra apenas os amigos
 $('#friends').click(function () {
+    if($("#friends").attr('name')=='stand-by'){
     var user = $("#search").attr('name').split(":"); 
     $("#listConnections").html('')
     for(j=0; j<users.length;j++){
@@ -180,7 +191,7 @@ $('#friends').click(function () {
                 '          <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">'+
                 '        </div>'+
                 '        <div class="col-sm-8">'+
-                '          <h4><a href="#">'+users[j].name+'</a></h4>'+
+                '          <h4><a href="friends/'+users[j]._id+":"+users[j].name+'">'+users[j].name+'</a></h4>'+
                 '          <p><a href="#">'+users[j].friends.length+' Friends</a></p>'+
                 '        </div>'+
                 '        <div class="col-sm-2">'+
@@ -195,8 +206,13 @@ $('#friends').click(function () {
                             $("#listConnections").append(myvar)
             }
         }
-        } 
+        }
+        $("#friends").attr('name', 'checked')
+        $('#friends').css("background-color", "red"); 
     }
+}else{
+    window.location.href = "http://localhost:3000/friends"
+}
 });
 
 

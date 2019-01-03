@@ -34,6 +34,17 @@ Events.insertNewParticipant = newParticipant=>{
         
 }
 
+//Remove Participants
+
+ 
+Events.removeParticipant = id=>{ 
+    console.log("Participante: "+id.participant + " Evento: "+id.idPost)
+    return Event
+        .updateOne({_id:id.idPost}, {$pull:{ participants: {id:id.participant} }})
+        .exec()
+        
+}
+
 //Get Participants
 Events.getParticipants = id=>{ 
     return Event

@@ -78,6 +78,13 @@ router.post('/events/participant', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//remove participant in Event
+router.post('/events/participant/remove', (req, res)=>{
+    Events.removeParticipant(req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
 //gets participants from Event
 router.get('/events/participants/:id', (req, res)=>{ 
     Events.getParticipants(req.params.id)
