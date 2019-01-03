@@ -58,8 +58,22 @@ router.get('/events/:name', (req, res)=>{
 })
 
 //insert new Event
-router.post('/events', (req, res)=>{
+router.post('/events', (req, res)=>{ 
     Events.insertNew(req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//insert participant in Event
+router.post('/events/participant', (req, res)=>{ 
+    Events.insertNewParticipant(req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
+//gets participants from Event
+router.get('/events/participants/:id', (req, res)=>{ 
+    Events.getParticipants(req.params.id)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })

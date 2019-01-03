@@ -57,18 +57,20 @@ block content
 												p Friday 15:00
 												p
 													button.w3-button.w3-block.w3-white(onclick="document.getElementById('ticketModal').style.display='block'") Add
-										br 
-									.w3-col.m2
-										.w3-card.w3-round.w3-black.w3-center
-											.w3-container
-												p Upcoming Events:
-												img(src="/w3images/forest.jpg" alt="Forest" style="width:100%;")
-												p
-													strong Holiday
-												p Friday 15:00
-												p
-													button.w3-button.w3-block.w3-white(onclick="document.getElementById('ticketModal').style.display='block'") Info
 										br
+									each u in events
+										.w3-col.m2
+											.w3-card.w3-round.w3-black.w3-center
+												.w3-container
+													p= u.local
+													if u.picture
+														img(src="images/eventos/"+u.picture alt="Forest" style="width:100%;")
+													p
+														strong= u.description
+													p= u.date
+													p
+														button.w3-button.w3-block.w3-white(onclick="showEventInfo('"+u._id+"','"+u.date+"','"+u.local+"','"+u.title+"','"+u.description+"','"+utilizador._id+"')") Info
+											br
 	.w3#ticketModal.w3-modal
 		.w3-modal-content.w3-animate-top.w3-card-4
 			header.w3-container.w3-black.w3-center.w3-padding-32
@@ -77,25 +79,77 @@ block content
 					i.fa.fa-suitcase.w3-margin-right
 					| Add new Event
 			.w3-container
+				form.w3-container(action="/events" method="POST" enctype="multipart/form-data")
+					p
+						label
+						i.fa.fa-shopping-cart
+						|  Data
+					input.w3-input.w3-border(type='date' id="inputDate" name="inputDate" placeholder='How many?')
+					p
+						label
+						i.fa.fa-shopping-cart
+						|  Local
+					input.w3-input.w3-border(type='text' id="inputLocation" name="inputLocation" placeholder='How many?')
+					p
+						label
+						i.fa.fa-user
+						|  Titulo
+					input.w3-input.w3-border(type='text' id="inputTitle" name="inputTitle" placeholder='Enter email')
+					p
+						label
+						i.fa.fa-user
+						|  Descrição
+					input.w3-input.w3-border(type='text' id="inputDescription" name="inputDescription" placeholder='Enter email')
+					p
+						label
+						i.fa.fa-shopping-cart
+						|  Image
+					input.w3-input.w3-border(type='file' id="inputImage" name="inputImage" placeholder='How many?')
+					input.w3-button.w3-block.w3-teal.w3-padding-16.w3-section.w3-right(type="Submit") 
+				button.w3-button.w3-red.w3-section(onclick="document.getElementById('ticketModal').style.display='none'")
+					| Close 
+					i.fa.fa-remove
+				p.w3-right
+					| Need 
+					a.w3-text-blue(href='#') help?
+	.w3#eventInfo.w3-modal
+		.w3-modal-content.w3-animate-top.w3-card-4
+			header.w3-container.w3-black.w3-center.w3-padding-32
+				span.w3-button.w3-black.w3-xlarge.w3-display-topright(onclick="document.getElementById('eventInfo').style.display='none'") &times;
+				h2.w3-wide
+					i.fa.fa-suitcase.w3-margin-right
+					| Event Info
+			.w3-container
+				p(hidden id="idDoEvento")
+				p
+					label
+					i.fa.fa-shopping-cart
+					|  Data
+				p(id="eventoData")
 				p
 					label
 					i.fa.fa-shopping-cart
 					|  Local
-				input.w3-input.w3-border(type='text' id="inputLocation" placeholder='How many?')
+				p(id="eventoLocal")
 				p
 					label
 					i.fa.fa-user
 					|  Titulo
-				input.w3-input.w3-border(type='text' id="inputTitle" placeholder='Enter email')
+				p(id="eventoTitle")
 				p
 					label
 					i.fa.fa-user
 					|  Descrição
-				input.w3-input.w3-border(type='text' id="inputDescription" placeholder='Enter email')
-				button.w3-button.w3-block.w3-teal.w3-padding-16.w3-section.w3-right(onclick="submeteEvento();")
-					| Submit Event 
+				p(id="eventoDescription")
+				p
+					label
+					i.fa.fa-user
+					|  Participantes
+				p(id="eventoParticipants") 
+				button.w3-button.w3-block.w3-green.w3-section(id="acceptEvent" name='yes' title='Accept' onclick="submeteParticipacao('"+utilizador._id+"','"+utilizador.name+"');")
+					| Accept 
 					i.fa.fa-check
-				button.w3-button.w3-red.w3-section(onclick="document.getElementById('ticketModal').style.display='none'")
+				button.w3-button.w3-red.w3-section(onclick="document.getElementById('eventInfo').style.display='none'")
 					| Close 
 					i.fa.fa-remove
 				p.w3-right

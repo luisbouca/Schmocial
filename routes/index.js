@@ -54,7 +54,7 @@ router.get('/profile/:id', verifyAuth, function (req, res) {
 
 /* Event page */
 router.get('/events', verifyAuth, function (req, res) {
-  axios.get('http://localhost:3000/api/events/'+req.params.id)
+  axios.get('http://localhost:3000/api/events/')
     .then(resposta => {  
       res.render('events', { events: resposta.data, utilizador:req.user })
     })
@@ -63,6 +63,53 @@ router.get('/events', verifyAuth, function (req, res) {
       res.render('error', { error: erro, message: 'Erro ao carregar da bd' })
     })
 
+});
+
+//Insert new Event
+
+router.post('/events', verifyAuth, function (req, res) {
+  console.log("Chego")
+  var event;
+  var form = new formidable.IncomingForm()
+  form.parse(req, (erro, fields, files) => {
+    if (!files.inputImage.name) {
+      event = {
+        date: fields.inputDate,
+        local: fields.inputLocation,
+        title : fields.inputTitle,
+        description : fields.inputDescription,
+      } 
+      axios.post('http://localhost:3000/api/events/', event)
+        .then(() => res.redirect('http://localhost:3000/'))
+        .catch(erro => {
+          console.log('Erro na inserção da bd')
+          //res.redirect('http://localhost:3000/')
+        })
+    } else {
+      var fenviado = files.inputImage.path
+      var fnovo = '../Schmocial/public/images/eventos/' + files.inputImage.name
+      fs.rename(fenviado, fnovo, erro => {
+        if (!erro) {
+          event = {
+          date: fields.inputDate,
+          local: fields.inputLocation,
+          title : fields.inputTitle,
+          description : fields.inputDescription,
+          picture : files.inputImage.name,
+          }
+          axios.post('http://localhost:3000/api/events/', event)
+            .then(() => res.redirect('http://localhost:3000/'))
+            .catch(erro => {
+              console.log('Erro na inserção da bd')
+              //res.redirect('http://localhost:3000/')
+            })
+        } else {
+          //res.render(error)
+          console.log("ERRO +" + erro)
+        }
+      })
+    }
+  })  
 });
 
 //Connects Routes

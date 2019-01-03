@@ -6,6 +6,7 @@ const Events = module.exports
 Events.list = ()=>{
     return Event
         .find({})
+        .sort({date:1}) 
         .exec()
 }
 
@@ -15,6 +16,23 @@ Events.getByTitle = title=>{
         .findOne({title: title})
         .exec()
 }
+
+//Insert Participants
+Events.insertNewParticipant = newParticipant=>{ 
+    return Event
+        .update({_id:newParticipant.idPost}, {$push:{participants:newParticipant.participant}})
+        .exec()
+        
+}
+
+//Get Participants
+Events.getParticipants = id=>{ 
+    return Event
+    .find({_id:id},{_id:0,participants:1}) 
+    .exec()
+        
+}
+
 //Create new Events
 Events.insertNew = newDoc=>{
     return Event

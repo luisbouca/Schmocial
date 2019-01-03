@@ -7,10 +7,11 @@ var participantSchema = new schema({
     name : {type: String}
 })
 var EventSchema = new schema({
-    datetime : {type: String,required:true},
+    date : {type: String,required:true},
     local : {type: String,required:true},
     title : {type: String,required:true},
     description : {type: String},
+    picture : {type:String},
     participants : [participantSchema]
 })
 
