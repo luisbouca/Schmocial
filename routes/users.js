@@ -16,6 +16,13 @@ router.get('/signin', (req, res)=>{
 	.catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//Logout
+router.get('/logout', (req, res)=>{
+	req.session.destroy(function (err) {
+		res.redirect('/'); //Inside a callback… bulletproof!
+	  });
+})
+
 //Post Login
 router.post('/signin', async (req, res, next) => {
 	passport.authenticate('login', async (err, user, info) => {     

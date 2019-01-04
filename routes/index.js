@@ -4,6 +4,18 @@ var axios = require('axios')
 var fs = require('fs')
 var formidable = require('formidable')
 var moment = require('moment');
+var passportFacebook = require('../auth/facebook');
+
+/* FACEBOOK ROUTER */
+router.get('/facebook',
+  passportFacebook.authenticate('facebook', { scope : ['email'] }));
+
+router.get('/facebook/callback',
+  passportFacebook.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 /* Home page. */
 router.get('/', function (req, res) {

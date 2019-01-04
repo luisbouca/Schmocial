@@ -24,7 +24,13 @@ var UserSchema = new schema({
     age: {type: String},
     gender: {type: String},
     friends:[friendSchema],
-    address: addressSchema
+    address: addressSchema,
+    facebook: {
+        id: {type: String},
+        token: {type: String},
+        email: {type: String},
+        name: {type: String}
+      },
 })
 
 UserSchema.pre('save', async function(next){
