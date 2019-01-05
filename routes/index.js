@@ -4,6 +4,7 @@ var axios = require('axios')
 var fs = require('fs')
 var formidable = require('formidable')
 var moment = require('moment');
+var FB = require('fb');
 var passportFacebook = require('../auth/facebook');
 
 /* FACEBOOK ROUTER */
@@ -274,6 +275,40 @@ router.post('/posts/vote/', verifyAuth, function (req, res) {
     .catch(erro => {
       console.log('Erro ao carregar da bd asdasd'+erro) 
     })
+
+});
+
+//Postar no face
+router.get('/facebook/post', verifyAuth, function (req, res) {
+  
+  var url = 'https://graph.facebook.com/'+req.user.facebook.id+'/feed';
+  console.log("URL"+url)
+
+  FB.setAccessToken(req.user.facebook.token);
+
+  var body = 'My first post using facebook-node-sdk';
+  FB.api('me/feed', 'post', { message: body}, function (res) {
+    if(!res || res.error) {
+      console.log(!res ? 'error occurred' : res.error);
+      return;
+    }
+    console.log('Post Id: ' + res.id);
+  });
+
+/*
+  var params = {
+   access_token: req.user.facebook.token,
+   message: "hi" 
+  }
+
+  axios.post(url,params)
+    .then(resposta => {
+      console.log(resposta.data) 
+    })
+    .catch(erro => {
+      console.log('Erro ao carregar da bd asdasd'+erro) 
+    })*/
+
 
 });
 

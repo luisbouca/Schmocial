@@ -3,8 +3,12 @@ extends layout
 block content
 	.w3-top
 		.w3-bar#navBar.w3-black
-			header.w3-container.w3-text-White.w3
+			header.w3-container.w3-text-White.w3(style="display:inline-block;")
 				h3= title
+			a.w3-button.w3-padding.w3-margin-bottom(style="background-color:#3b5998;display:inline;" href='/facebook')
+				span
+					i.fab.fa-facebook
+						|  Login with Facebook 
 			form.w3-container.w3-display-right(action="/users/signin" method="POST")
 				input(type="text" name="email" placeholder="Email").w3-margin-right
 				input(type="password" name="password" placeholder="Password").w3-margin-right
@@ -18,8 +22,7 @@ block content
 			p Welcome to Schmocial a network for you and your friends
 			img(src="/images/homepage.jpg" style="width:50%").w3-round.w3-grayscale-max
 		.w3-container.w3-half.w3-margin-top
-			h5 Sign Up
-			a.btn.btn-primary(href='/facebook') Facebook
+			h5 Sign Up 
 			form.w3-container(action="/users/signup" method="POST").w3-black.w3-margin
 				.w3container.w3-margin
 					label Full Name

@@ -31,7 +31,7 @@ passport.use(new FacebookStrategy({
                   
                 name: profile.displayName,
                 email: profile.emails[0].value,
-                username: profile.displayName,
+                username: profile._json.first_name,
                 gender: profile.gender,
                 provider: 'facebook',
                 password: "123", 
