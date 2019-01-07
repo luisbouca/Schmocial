@@ -35,7 +35,10 @@ block content
 					.w3-container
 						h4.w3-center(id="userId" name=username)= utilizador.name
 						p.w3-center
-							img.w3-circle(src="images/capa.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+							if(utilizador.picture)
+								img.w3-circle(src="images/profile/"+utilizador.picture style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+							else
+								img.w3-circle(src="/w3images/avatar6.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 						hr
 						p 
 							i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
@@ -140,7 +143,7 @@ block content
 								button.w3-button.w3-margin-bottom(type="button")
 									i.fa.fa-comment  Comment 
 								if utilizador.facebook
-									a
+									a(href="/facebook/post")
 										i.fab.fa-facebook.fa-2x.w3-hover-white.w3-circle(style="background-color:#3b5998;cursor: pointer; padding:1%") 
 								.w3-container.w3-card(class="commentSection" name=p._id) 
 									if p.comments

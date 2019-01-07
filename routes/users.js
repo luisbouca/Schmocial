@@ -3,6 +3,8 @@ var router = express.Router();
 var passport = require('passport')
 var axios = require('axios')
 var jwt = require('jsonwebtoken')
+var fs = require('fs')
+var formidable = require('formidable')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -63,25 +65,59 @@ router.post('/Login', (req, res)=>{
 })
 
 router.post('/signup', function(req, res) {
-var user = {
-  name: req.body.name,
-  username: req.body.username,
-  password: req.body.password,
-  email:  req.body.email,
-  age:  req.body.age,
-  gender: req.body.gender,
-  address:{
-    country:req.body.country,
-    city: req.body.city  
-  }
-}
-
-  axios.post('http://localhost:3000/api/users/signup', user)
+var user
+var form = new formidable.IncomingForm()
+  form.parse(req, (erro, fields, files) => {
+    if (!files.profilePic.name) {
+      user = {
+        name: fields.name,
+        username: fields.username,
+        password : fields.password,
+        email : fields.email,
+        age: fields.age,
+				gender: fields.gender,
+				address:{
+					country:fields.country,
+					city: fields.city  
+				}
+      } 
+      axios.post('http://localhost:3000/api/users/signup', user)
   .then(() => res.redirect('http://localhost:3000/'))
   .catch(erro => {
     console.log('Erro na inserção da bd')
     //res.redirect('http://localhost:3000/')
   })
+    } else {
+      var fenviado = files.profilePic.path
+      var fnovo = '../Schmocial/public/images/profile/' + files.profilePic.name
+      fs.rename(fenviado, fnovo, erro => {
+        if (!erro) {
+          user = {
+						name: fields.name,
+						username: fields.username,
+						password : fields.password,
+						email : fields.email,
+						age: fields.age,
+						gender: fields.gender,
+						address:{
+							country:fields.country,
+							city: fields.city  
+						},
+						picture:files.profilePic.name
+					}
+          axios.post('http://localhost:3000/api/users/signup', user)
+  .then(() => res.redirect('http://localhost:3000/'))
+  .catch(erro => {
+    console.log('Erro na inserção da bd')
+    //res.redirect('http://localhost:3000/')
+  })
+        } else {
+          //res.render(error)
+          console.log("ERRO +" + erro)
+        }
+      })
+    }
+  })  
   
 });
 

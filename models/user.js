@@ -25,6 +25,7 @@ var UserSchema = new schema({
     gender: {type: String},
     friends:[friendSchema],
     address: addressSchema,
+    picture:{type:String},
     facebook: {
         id: {type: String},
         token: {type: String},

@@ -24,7 +24,7 @@ $("#friendsContainer").append(myvar)
     }
 })
 var users 
-
+var pic=""
     //load all users into the connections page
     $.ajax({
         type: "GET",
@@ -43,13 +43,18 @@ var users
                             }
 
                         }
+                        if(!data[i].picture){
+                            pic='<img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">'
+                        }else{
+                            pic='<img src='+"images/profile/"+data[i].picture+' class="img-circle" width="60px">'
+                        }
 var myvar = 
 '  <div class="row">'+
 ''+
 '    <div class="shadow">'+
 '      <div class="col-sm-12">'+
 '        <div class="col-sm-2">'+
-'          <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">'+
+pic+
 '        </div>'+
 '        <div class="col-sm-8">'+
 '          <h4><a href="#">'+data[i].name+'</a></h4>'+

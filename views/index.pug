@@ -5,14 +5,9 @@ block content
 		.w3-bar#navBar.w3-black
 			header.w3-container.w3-text-White.w3(style="display:inline-block;")
 				h3= title
-			a.w3-button.w3-padding.w3-margin-bottom(style="background-color:#3b5998;display:inline;" href='/facebook')
-				span
-					i.fab.fa-facebook
-						|  Login with Facebook 
-			form.w3-container.w3-display-right(action="/users/signin" method="POST")
-				input(type="text" name="email" placeholder="Email").w3-margin-right
-				input(type="password" name="password" placeholder="Password").w3-margin-right
-				input(type="submit" value="Login").w3-button.w3-white
+			.w3-container.w3-padding(style="float:right")
+				button.w3-btn.w3-green.w3-margin-right(type="button" onclick="document.getElementById('id01').style.display='block'") Login
+				button.w3-btn.w3-blue(type="button" onclick="document.getElementById('id02').style.display='block'") Register
 			//a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
 			//	<i class="fa fa-search"></i>
 			//</a>
@@ -21,36 +16,68 @@ block content
 		.w3-container.w3-half.w3-margin-top
 			p Welcome to Schmocial a network for you and your friends
 			img(src="/images/homepage.jpg" style="width:50%").w3-round.w3-grayscale-max
-		.w3-container.w3-half.w3-margin-top
-			h5 Sign Up 
-			form.w3-container(action="/users/signup" method="POST").w3-black.w3-margin
+	.w3#id01.w3-modal
+		.w3-modal-content.w3-card-4.w3-animate-zoom(style='max-width:600px')
+			.w3-center
+				br
+				span.w3-button.w3-xlarge.w3-transparent.w3-display-topright(onclick="document.getElementById('id01').style.display='none'" title='Close Modal') &times;
+				img.w3-circle.w3-margin-top(src="/w3images/avatar2.png" alt='Avatar' style='width:30%')
+			form.w3-container(action="/users/signin" method="POST")
+				.w3-section
+					label
+						b Email
+					input.w3-input.w3-border.w3-margin-bottom(type='text' placeholder='Enter Email' name='email' required='')
+					label
+						b Password
+					input.w3-input.w3-border(type='text' placeholder='Enter Password' name='password' required='')
+					button.w3-button.w3-block.w3-green.w3-section.w3-padding(type='submit') Login
+					input.w3-check.w3-margin-top(type='checkbox' checked='checked')
+					|  Remember me
+			.w3-container.w3-border-top.w3-padding-16.w3-light-grey
+				button.w3-button.w3-red(onclick="document.getElementById('id01').style.display='none'" type='button') Cancel
+				span.w3-right.w3-padding.w3-hide-small
+					| Forgot 
+					a(href='#') password?
+				a.w3-button.w3-padding(style="background-color:#3b5998;" href='/facebook')
+					span
+						i.fab.fa-facebook
+							|  Login with Facebook 
+	.w3#id02.w3-modal
+		.w3-modal-content.w3-card-4.w3-animate-zoom(style='max-width:600px')
+			.w3-center
+				br
+				span.w3-button.w3-xlarge.w3-transparent.w3-display-topright(onclick="document.getElementById('id02').style.display='none'" title='Close Modal') &times;		
+			form.w3-container(action="/users/signup" method="POST" enctype="multipart/form-data")
+				.w3-center
+					label(for="profilePic")
+						img.w3-circle.w3-margin-top(src="/w3images/avatar2.png" alt='Avatar' style='width:30%')
+					input.w3-input.w3-boarder.w3-light-grey(id="profilePic" style="display: none;" type='file', name="profilePic")
 				.w3container.w3-margin
 					label Full Name
-					input(type="text" name="name" placeholder="Name" style="width:100%")
+					input.w3-input.w3-border.w3-margin-bottom(type="text" required name="name" placeholder="Name" style="width:100%")
 				.w3container.w3-margin
 					label Email
-						input(type="text" name="email" placeholder="Email" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="text" required name="email" placeholder="Email" style="width:100%")
 				.w3-container.w3-half
 					label Username
-						input(type="text" name="username" placeholder="Username" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="text" required name="username" placeholder="Username" style="width:100%")
 				.w3-container.w3-half
 					label Password
-						input(type="password" name="password" placeholder="Password" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="password" required name="password" placeholder="Password" style="width:100%")
 				.w3-container.w3-half
 					label Age
-						input(type="text" name="age" placeholder="Age" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="text" required name="age" placeholder="Age" style="width:100%")
 				.w3-container.w3-half
 					label Gender
-						input(type="text" name="gender" placeholder="Gender" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="text" required name="gender" placeholder="Gender" style="width:100%")
 				.w3-container.w3-half
 					label Country
-						input(type="text" name="country" placeholder="Country" style="width:100%")
+						input.w3-input.w3-border.w3-margin-bottom(type="text" required name="country" placeholder="Country" style="width:100%")
 				.w3-container.w3-half
 					label City
-						input(type="text" name="city" placeholder="City" style="width:100%")
-				input(type="submit" value="Sign Up").w3-button.w3-white.w3-margin
-
-			
-			
+						input.w3-input.w3-border.w3-margin-bottom(type="text" name="city" placeholder="City" style="width:100%")
+				button.w3-button.w3-block.w3-blue.w3-section.w3-padding(type='submit') Register
+			.w3-container.w3-border-top.w3-padding-16.w3-light-grey
+				button.w3-button.w3-red(onclick="document.getElementById('id02').style.display='none'" type='button') Cancel
 	footer.w3-container.w3-black
 		address Copyright@Schmocial 2018
