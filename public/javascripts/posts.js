@@ -118,6 +118,8 @@ function voteFunc(user,post){
         $('#'+''+post+'').text((parseInt(result)+1)) 
 }
 
+//Chat
+ 
 $(() => {
     $('#hashtags').load('http://localhost:3000/posts/hashtags');
 
@@ -163,4 +165,23 @@ $(() => {
             error: error
         })
     }
+ 
+//Adiciona os amigos à janela do chat
+$.ajax({
+    type: "GET",
+    contentType: "application/json",
+    url: "http://localhost:3000/api/friends/get/user/"+$('#userId').attr("name"),
+    dataType: "json",
+    success: function (data) {    
+        $("#chatUsers").html('')
+        $("#chatUsers").append("<h3>Chat</h3>") 
+        if(data.length!=0){ 
+            for(i=0; i<data[0].friends.length; i++){
+                var myvar = '<p><img style="margin-right:2%" src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="32"><span class="w3-hover-white" onclick="document.getElementById(\'chatPop\').style.display=\'block\'; loadUser('+'\''+data[0].friends[i].id+'\');" style="cursor: pointer">'+data[0].friends[i].name+'</span></p>';
+                $("#chatUsers").append(myvar) 
+            }
+}
+    }
+})
+
 })

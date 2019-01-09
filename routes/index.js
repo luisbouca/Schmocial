@@ -252,11 +252,21 @@ router.post('/insertPost', verifyAuth, function (req, res) {
 
 
 router.post('/posts/comment/', verifyAuth, function (req, res) {
-  var comment = {
-    message:req.body.comment,
-    user:req.user._id+":"+req.user.name,
-    date:moment().format("YYYY-MM-DD HH:mm:ss")
-  } 
+  var comment
+  if(req.user.picture){
+    comment = {
+      message:req.body.comment,
+      user:req.user._id+":"+req.user.name,
+      date:moment().format("YYYY-MM-DD HH:mm:ss"), 
+      picture:req.user.picture
+    } 
+  }else{
+    comment = {
+      message:req.body.comment,
+      user:req.user._id+":"+req.user.name,
+      date:moment().format("YYYY-MM-DD HH:mm:ss")
+    } 
+  }
   axios.post('http://localhost:3000/api/posts/comment/'+req.body.id, comment)
     .then(resposta => {
       console.log(resposta.data) 

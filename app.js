@@ -24,6 +24,30 @@ mongose.connect('mongodb://127.0.0.1:27017/schmocial',{useNewUrlParser: true}).t
 
 var app = express();
 
+var io = require('./io');
+
+io.on('connection', function (socket) {
+  console.log("HEHEHE"+req.user.username)
+  socket.on('news', function (data) {
+      console.log(data);
+
+      // Depends on your business logic
+
+      // Sends to sender-client only      
+      // socket.emit('news', data);
+
+      // Sends to all clients except sender
+      // socket.broadcast.emit('news', data);
+
+      // Sends to all client including sender     
+      io.emit('news', data);
+  });
+});
+
+io.on('error', function () {
+    console.log("errr");
+});
+
 
 
 

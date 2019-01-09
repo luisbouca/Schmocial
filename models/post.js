@@ -6,7 +6,8 @@ var schema = mongose.Schema
 var commentSchema = new schema({
     message: {type: String, required:true},
     user: {type: String, required:true},
-    date: {type: String}
+    date: {type: String},
+    picture: {type:String}
 })
 
 var voteSchema = new schema({

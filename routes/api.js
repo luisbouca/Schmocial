@@ -201,4 +201,10 @@ router.get('/friends/get/:id', (req, res)=>{
     .then(dados => res.jsonp(dados))
 })
 
+//Get User Friends
+router.get('/friends/get/user/:id', (req, res)=>{ 
+    Users.getUserFriends(req.params.id)
+    .then(dados => res.jsonp(dados))
+})
+
 module.exports = router;
