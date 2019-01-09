@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var http = require("http");
+var https = require("https");
 
 var uuid = require('uuid/v4')
 var session = require('express-session')
@@ -26,11 +27,10 @@ var app = express();
 
 var io = require('./io');
 
-io.on('connection', function (socket) {
-  console.log("HEHEHE"+req.user.username)
+io.on('connection', function (socket) { 
+  console.log("socket id"+socket.id);
   socket.on('news', function (data) {
-      console.log(data);
-
+    socket.join(data.id);
       // Depends on your business logic
 
       // Sends to sender-client only      
@@ -38,6 +38,9 @@ io.on('connection', function (socket) {
 
       // Sends to all clients except sender
       // socket.broadcast.emit('news', data);
+
+      //Specific user
+      //socket.broadcast.to(socketid).emit('message', 'for your eyes only');
 
       // Sends to all client including sender     
       io.emit('news', data);

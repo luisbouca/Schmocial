@@ -95,7 +95,7 @@ block content
 								form.w3-container(action="/insertPost" method="POST" enctype="multipart/form-data")
 									h6.w3-opacity Schmocial post
 									.w3-container.w3-border.w3-padding
-										input.w3-animate-input(type='text' required style="width:70%" name="descricao" placeholder="Status: Feeling Blue") 
+										input.w3-border-0.w3-animate-input.w3-padding(type='text' required style="width:70%" name="descricao" placeholder="Status: Feeling Blue") 
 										label(style="margin-left:3%") Status: 
 										select(name="state")
 											option(value="private") Private
@@ -104,13 +104,13 @@ block content
 											i.fa.fa-camera
 										input.w3-input.w3-boarder.w3-light-grey(id="fileInput" style="display: none;" type='file', name="ficheiro")
 									.w3-container.w3-padding(id="hashtagContainer") 								
-										input.w3-padding.w3-round-xxlarge(style="width:26%" type="text" name="hashtags[]" placeholder="Insert an hashtag")
+										input.w3-border-0.w3-padding.w3-round-large(style="width:26%" type="text" name="hashtags[]" placeholder="Insert an hashtag")
 									button.w3-button.w3-margin-bottom(type="button" id="addHashtag") 
 										i.fa.fa-chevron-up  Add Hashtag
 									button.w3-button.w3-margin-bottom(type="button" id="removeHashtag") 
 										i.fa.fa-chevron-down  Remove Hashtag
 									br
-									input.w3-btn.w3-blue-grey(type="submit", value="Post")  
+									input.w3-btn.w3-blue-grey(type="submit", value="Post")
 				.w3-col.m12(id="conteudoPosts")
 					each p in posts			
 						.w3-container.w3-card.w3-black.w3-round.w3-margin
@@ -147,7 +147,16 @@ block content
 							.w3-container.w3-card(class="commentSection" name=p._id) 
 								if p.comments
 									each m in p.comments
-											p= m.user.split(":")[1] + "        "+ m.message
+										if m.picture
+											if(utilizador.picture==m.picture)
+												img.w3-circle(src="images/profile/"+utilizador.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+											else
+												img.w3-circle(src="images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+										else
+											img.w3-circle(src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+										p.w3-padding.w3-round-large.w3-light-grey(style="display:inline-block;width:90%") 
+											span(style="color:blue; font-weight: bold")= m.user.split(":")[1]
+											span(style="margin-left:1%")= m.message
 							textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="77%", rows="1" placeholder="Enter a new comment")
 				//Right Column 
 		footer.w3-container.w3-black

@@ -3,7 +3,7 @@ $(() => {
 
     $("#sendMessage").click(function () { 
         
-        socket.emit("news", { message: $("#message").val() })
+        socket.emit("news", { message: $("#message").val(), id:personTalkingTo })
     });
 
     socket.on('news', function (data) {

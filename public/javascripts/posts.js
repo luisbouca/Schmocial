@@ -49,7 +49,13 @@ function filterHash(teste) {
                     }
                     if (data[i].comments) {
                         for (j = 0; j < data[i].comments.length; j++) {
-                            comments = comments + '<p>' + data[i].comments[j].user.split(":")[1] + "        " + data[i].comments[j].message + '</p>'
+                            if(data[i].comments[j].picture){
+                                comments = comments + '<img class="w3-circle" src="images/profile/'+data[i].comments[j].picture+'" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'  
+                            }else{ 
+                                comments = comments + '<img class="w3-circle" src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'                               
+                            }
+                           // comments = comments + '<p>' + data[i].comments[j].user.split(":")[1] + "        " + data[i].comments[j].message + '</p>'
+                            comments = comments + '<p class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+ data[i].comments[j].user.split(":")[1] + '</span><span style="margin-left:1%;">'+ data[i].comments[j].message +'</span></p>'
                         }
                     } else {
                         comments = ""
@@ -58,12 +64,12 @@ function filterHash(teste) {
                         '<img class="w3-left w3-circle w3-margin-right" style="width:60px;" src="/w3images/avatar6.png" alt="Avatar" /><span class="w3-right w3-opacity">32 min</span>' +
                         '    <h4>'+data[i].owner.split(":")[1]+'</h4><br/>' +
                         '    <hr class="w3-clear" />' +
-                        '    <p>' + data[i].title + '</p>' + pic + '<p>' + data[i].content + '</p><div class="w3-card w3-black" style="display: inline;">'+
+                        '    <p>' + data[i].content + '</p>' + pic + '<div class="w3-card w3-black" style="display: inline;">'+
                         '    <p class="w3-margin-bottom" id=' + data[i]._id + ' style="display: inline;">'+data[i].votes.length+' </p><i class="far fa-thumbs-up" style="font-size:24px; padding: 5px; display: inline;"></i></div><button class="w3-button w3-margin-bottom" type="button" id="teste" onclick="voteFunc('+currentUser+', '+data[i]._id+')"><i class="fa fa-chevron-up"> Upvote</i></button><button class="w3-button w3-margin-bottom" type="button"><i class="fa fa-chevron-down"> Downvote</i></button><button class="w3-button w3-margin-bottom"' +
                         '        type="button"><i class="fa fa-comment"> Comment </i></button>' +
                         '    <div class="w3-container w3-card commentSection" name=' + data[i]._id + '>' +
                         comments + '</div>'+
-                        '<textarea id="NewComment" name=' + data[i]._id + ' cols="80%" rows="1" placeholder="Enter a new comment"></textarea>' +
+                        '<textarea class="w3-padding w3-round-large w3-light-grey"  id="NewComment" name=' + data[i]._id + ' cols="78%" rows="1" placeholder="Enter a new comment"></textarea>' +
                         '</div>';
                 }
                 $('#conteudoPosts').append(myvar);
@@ -124,7 +130,7 @@ $(() => {
     $('#hashtags').load('http://localhost:3000/posts/hashtags');
 
     $('#addHashtag').click(function () {
-        $('#hashtagContainer').append('<input class="w3-padding w3-round-xxlarge" style="width:26%" type="text" placeholder="Insert an hashtag" name="hashtags[]"></input>');
+        $('#hashtagContainer').append('<input class="w3-border-0 w3-padding w3-round-large" style="width:26%; margin-left:1%" type="text" name="hashtags[]" placeholder="Insert an hashtag" />');
     });
 
     $('#removeHashtag').click(function () {
