@@ -138,11 +138,11 @@ block content
 										if v==username 
 											- cont=1
 									if cont == 1
-										button.w3-button.w3-margin-bottom(type="button" id="downVoteBtn" onclick="voteDown('"+username+"', '"+p._id+"')")
-											i.fa.fa-chevron-down(id="downVote")  Downvote
+										button.w3-button.w3-margin-bottom(type="button" id="downVoteBtn"+p._id onclick="voteDown('"+username+"', '"+p._id+"')")
+											i.fa.fa-chevron-down(id="downVote"+p._id)  Downvote
 									else
-										button.w3-button.w3-margin-bottom(type="button" id="upVoteBtn" onclick="voteFunc('"+username+"', '"+p._id+"')")
-											i.fa.fa-chevron-up(id="upVote")  Upvote 
+										button.w3-button.w3-margin-bottom(type="button" id="upVoteBtn"+p._id onclick="voteFunc('"+username+"', '"+p._id+"')")
+											i.fa.fa-chevron-up(id="upVote"+p._id)  Upvote 
 									.w3-card.w3-black(style="display: inline")
 										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
 										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')  

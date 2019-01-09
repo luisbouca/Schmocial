@@ -119,11 +119,11 @@ function voteFunc(user,post){
             data: JSON.stringify({ user: user, post: post }),
             dataType: "json",
             success: function () {
-                $("#upVote").text('Downvote')
-                $("#upVoteBtn").attr("onclick","voteDown('"+user+"','"+post+"')");
-                $("#upVoteBtn").attr("id","downVoteBtn"); 
-                $('#upVote').attr({
-                    id: 'downVote',
+                $("#upVote"+post).text('Downvote')
+                $("#upVoteBtn"+post).attr("onclick","voteDown('"+user+"','"+post+"')");
+                $("#upVoteBtn"+post).attr("id","downVoteBtn"+post); 
+                $('#upVote'+post).attr({
+                    id: 'downVote'+post,
                     class: 'fa fa-chevron-down'
                 });
                 }
@@ -141,11 +141,11 @@ function voteDown(user,post){
         data: JSON.stringify({ user: user, post: post }),
         dataType: "json",
         success: function () {
-            $("#downVote").text('Upvote')
-            $("#downVoteBtn").attr("onclick","voteFunc('"+user+"','"+post+"')");
-            $("#downVoteBtn").attr("id","upVoteBtn"); 
-            $('#downVote').attr({
-                id: 'upVote',
+            $("#downVote"+post).text('Upvote')
+            $("#downVoteBtn"+post).attr("onclick","voteFunc('"+user+"','"+post+"')");
+            $("#downVoteBtn"+post).attr("id","upVoteBtn"+post); 
+            $('#downVote'+post).attr({
+                id: 'upVote'+post,
                 class: 'fa fa-chevron-up'
               });
         }
