@@ -250,7 +250,7 @@ router.post('/insertPost', verifyAuth, function (req, res) {
   }) 
 });
 
-
+//Insere comentario
 router.post('/posts/comment/', verifyAuth, function (req, res) {
   var comment
   if(req.user.picture){
@@ -277,6 +277,7 @@ router.post('/posts/comment/', verifyAuth, function (req, res) {
 
 });
 
+//Insere voto
 router.post('/posts/vote/', verifyAuth, function (req, res) { 
   axios.post('http://localhost:3000/api/posts/vote/',req.body)
     .then(resposta => {

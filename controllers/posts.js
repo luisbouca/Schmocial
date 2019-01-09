@@ -63,6 +63,15 @@ Posts.insertNewVote = (user,post)=>{
         
 }
 
+//Remove vote in Post
+Posts.removeVote = (user,post)=>{ 
+    return Post
+        .update({_id: post},
+            { $pull: { "votes" : user } })
+        .exec()
+        
+}
+
 //List all Post Hashtags 
 Posts.listHashtags = ()=>{
     return Post

@@ -177,6 +177,14 @@ router.post('/posts/vote/', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
+//Add new vote
+router.post('/posts/vote/remove', (req, res)=>{ 
+    console.log("dasfaaa"+req.body.user)
+    Posts.removeVote(req.body.user, req.body.post)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
+
 //New Friend Request
 router.post('/friends/new/', (req, res)=>{ 
     Users.insertNewFriend(req.body)

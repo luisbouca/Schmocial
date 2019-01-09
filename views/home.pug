@@ -133,15 +133,19 @@ block content
 								if (p.picture)
 									img.w3-margin-bottom(src="images/"+p.picture style="width:100%")
 								if p.votes
+									- var cont = 0
+									each v in p.votes
+										if v==username 
+											- cont=1
+									if cont == 1
+										button.w3-button.w3-margin-bottom(type="button" id="downVoteBtn" onclick="voteDown('"+username+"', '"+p._id+"')")
+											i.fa.fa-chevron-down(id="downVote")  Downvote
+									else
+										button.w3-button.w3-margin-bottom(type="button" id="upVoteBtn" onclick="voteFunc('"+username+"', '"+p._id+"')")
+											i.fa.fa-chevron-up(id="upVote")  Upvote 
 									.w3-card.w3-black(style="display: inline")
 										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
-										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')   
-								button.w3-button.w3-margin-bottom(type="button" id="teste" onclick="voteFunc('"+username+"', '"+p._id+"')")
-									i.fa.fa-chevron-up  Upvote
-								button.w3-button.w3-margin-bottom(type="button")
-									i.fa.fa-chevron-down  Downvote 
-								button.w3-button.w3-margin-bottom(type="button")
-									i.fa.fa-comment  Comment 
+										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')  
 								if utilizador.facebook
 									a(href="/facebook/post")
 										i.fab.fa-facebook.fa-2x.w3-hover-white.w3-circle(style="background-color:#3b5998;cursor: pointer; padding:1%") 

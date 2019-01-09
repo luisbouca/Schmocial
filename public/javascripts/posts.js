@@ -115,13 +115,42 @@ function voteFunc(user,post){
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:3000/posts/vote",
+            url: "http://localhost:3000/api/posts/vote",
             data: JSON.stringify({ user: user, post: post }),
             dataType: "json",
             success: function () {
-            }
+                $("#upVote").text('Downvote')
+                $("#upVoteBtn").attr("onclick","voteDown('"+user+"','"+post+"')");
+                $("#upVoteBtn").attr("id","downVoteBtn"); 
+                $('#upVote').attr({
+                    id: 'downVote',
+                    class: 'fa fa-chevron-down'
+                });
+                }
         }) 
         $('#'+''+post+'').text((parseInt(result)+1)) 
+}
+
+//Remoção de voto
+function voteDown(user,post){  
+    var result = $('#'+''+post+'').text()
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:3000/api/posts/vote/remove",
+        data: JSON.stringify({ user: user, post: post }),
+        dataType: "json",
+        success: function () {
+            $("#downVote").text('Upvote')
+            $("#downVoteBtn").attr("onclick","voteFunc('"+user+"','"+post+"')");
+            $("#downVoteBtn").attr("id","upVoteBtn"); 
+            $('#downVote').attr({
+                id: 'upVote',
+                class: 'fa fa-chevron-up'
+              });
+        }
+    }) 
+    $('#'+''+post+'').text((parseInt(result)-1)) 
 }
 
 //Chat
