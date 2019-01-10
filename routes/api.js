@@ -153,6 +153,12 @@ router.post('/posts', (req, res)=>{
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
+//Remove comment on Post
+router.post('/posts/comment/remove', (req, res)=>{ 
+    Posts.removeComment(req.body)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
+})
 
 //insert new comment on Post
 router.post('/posts/comment/:id', (req, res)=>{
@@ -177,7 +183,7 @@ router.post('/posts/vote/', (req, res)=>{
     .catch(erro => res.status(500).send('DEU ERRO NA LISTAGEMMMMM'))
 })
 
-//Add new vote
+//Remove vote
 router.post('/posts/vote/remove', (req, res)=>{ 
     console.log("dasfaaa"+req.body.user)
     Posts.removeVote(req.body.user, req.body.post)

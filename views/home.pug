@@ -138,13 +138,13 @@ block content
 										if v==username 
 											- cont=1
 									if cont == 1
-										button.w3-button.w3-margin-bottom(type="button" id="downVoteBtn"+p._id onclick="voteDown('"+username+"', '"+p._id+"')")
+										button.w3-button.w3-hover-white(type="button" id="downVoteBtn"+p._id onclick="voteDown('"+username+"', '"+p._id+"')")
 											i.fa.fa-chevron-down(id="downVote"+p._id)  Downvote
 									else
-										button.w3-button.w3-margin-bottom(type="button" id="upVoteBtn"+p._id onclick="voteFunc('"+username+"', '"+p._id+"')")
+										button.w3-button.w3-hover-white(type="button" id="upVoteBtn"+p._id onclick="voteFunc('"+username+"', '"+p._id+"')")
 											i.fa.fa-chevron-up(id="upVote"+p._id)  Upvote 
 									.w3-card.w3-black(style="display: inline")
-										p.w3-margin-bottom(id=p._id style="display: inline")= p.votes.length  
+										p(id=p._id style="display: inline")= p.votes.length  
 										i.far.fa-thumbs-up(style='font-size:24px; padding: 5px; display: inline;')  
 								if utilizador.facebook
 									a(href="/facebook/post")
@@ -154,14 +154,16 @@ block content
 										each m in p.comments
 											if m.picture
 												if(utilizador.picture==m.picture)
-													img.w3-circle(src="images/profile/"+utilizador.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+													img.w3-circle(id="image"+m._id src="images/profile/"+utilizador.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 												else
-													img.w3-circle(src="images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+													img.w3-circle(id="image"+m._id src="images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 											else
-												img.w3-circle(src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
-											p.w3-padding.w3-round-large.w3-light-grey(style="display:inline-block;width:90%") 
+												img.w3-circle(id="image"+m._id src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+											p.w3-padding.w3-round-large.w3-light-grey(id="comment"+m._id style="display:inline-block;width:90%") 
 												span(style="color:blue; font-weight: bold")= m.user.split(":")[1]
 												span(style="margin-left:1%")= m.message
+												if m.user==''+utilizador._id+':'+utilizador.name+''
+													i.fa.fa-trash.fa-lg(style="float:right" onclick="removeComent('"+m._id+"','"+p._id+"')")
 								textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="78%", rows="1" placeholder="Enter a new comment")
 				.w3-container#chatPop.w3-display-bottomright(style="position: fixed;height:55%;width:20%;bottom: 0;display:none;margin-right:21%;background-color: #fff;right: 0;flex-wrap: wrap;overflow-y: scroll;")
 					.w3-container

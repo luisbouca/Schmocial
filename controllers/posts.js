@@ -55,6 +55,16 @@ Posts.insertNewComent = (id,newDoc)=>{
         
 }
 
+//Remove comment in Post
+Posts.removeComment = (info)=>{  
+    console.log("Nao aqui")
+    return Post
+        .update({_id: info.post},
+            {$pull:{ comments: {_id:info.comment} }})
+        .exec()
+        
+}
+
 //Insert vote in Post
 Posts.insertNewVote = (user,post)=>{ 
     return Post

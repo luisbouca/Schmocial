@@ -41,6 +41,8 @@ function filterHash(teste) {
                 var myvar = ""
                 var pic
                 var comments = "" 
+                var cont = 0
+                var voto
                 if (data[i].state == "public") {
                     if (data[i].picture) {
                         pic = '<img class="w3-margin-bottom" src=' + 'images/' + data[i].picture + ' style="width:100%;" />'
@@ -50,23 +52,37 @@ function filterHash(teste) {
                     if (data[i].comments) {
                         for (j = 0; j < data[i].comments.length; j++) {
                             if(data[i].comments[j].picture){
-                                comments = comments + '<img class="w3-circle" src="images/profile/'+data[i].comments[j].picture+'" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'  
+                                comments = comments + '<img id="image'+data[i].comments[j]._id+'" class="w3-circle" src="images/profile/'+data[i].comments[j].picture+'" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'  
                             }else{ 
-                                comments = comments + '<img class="w3-circle" src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'                               
+                                comments = comments + '<img id="image'+data[i].comments[j]._id+'" class="w3-circle" src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'                               
                             }
-                           // comments = comments + '<p>' + data[i].comments[j].user.split(":")[1] + "        " + data[i].comments[j].message + '</p>'
-                            comments = comments + '<p class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+ data[i].comments[j].user.split(":")[1] + '</span><span style="margin-left:1%;">'+ data[i].comments[j].message +'</span></p>'
-                        }
+                            if(data[i].comments[j].user==(currentUser+':'+$('#userId').text())){
+                                comments = comments + '<p id="comment'+data[i].comments[j]._id+'" class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+ data[i].comments[j].user.split(":")[1] + '</span><span style="margin-left:1%;">'+ data[i].comments[j].message +'</span><i class="fa fa-trash fa-lg" style="float:right;" onclick="removeComent('+'\''+data[i].comments[j]._id+'\','+'\''+data[i]._id+'\')"></i></p>'
+                            }else{ 
+                                comments = comments + '<p id="comment'+data[i].comments[j]._id+'" class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+ data[i].comments[j].user.split(":")[1] + '</span><span style="margin-left:1%;">'+ data[i].comments[j].message +'</span></p>'                       
+                            }
+                             }
                     } else {
                         comments = ""
+                    }
+                    if(data[i].votes){
+                        for (l = 0; l < data[i].votes.length; l++) {
+                            if(data[i].votes[l]==currentUser){
+                                cont = 1
+                            } 
+                            }
+                        if(cont==1){
+                            voto = '<button class="w3-button" id="downVoteBtn'+data[i]._id+'" onclick="voteDown('+'\''+currentUser+'\','+'\''+data[i]._id+'\');" type="button"><i class="fa fa-chevron-down" id="downVote'+data[i]._id+'"> Downvote</i></button>'
+                        }else{
+                            voto = '<button class="w3-button" id="upVoteBtn'+data[i]._id+'" onclick="voteFunc('+'\''+currentUser+'\','+'\''+data[i]._id+'\');" type="button"><i class="fa fa-chevron-up" id="upVote'+data[i]._id+'"> Upvote</i></button>'
+                        }
                     } 
                     myvar = myvar + '<div class="w3-container w3-card w3-black w3-round w3-margin"><br/>' +
                         '<img class="w3-left w3-circle w3-margin-right" style="width:60px;" src="/w3images/avatar6.png" alt="Avatar" /><span class="w3-right w3-opacity">32 min</span>' +
                         '    <h4>'+data[i].owner.split(":")[1]+'</h4><br/>' +
                         '    <hr class="w3-clear" />' +
-                        '    <p>' + data[i].content + '</p>' + pic + '<div class="w3-card w3-black" style="display: inline;">'+
-                        '    <p class="w3-margin-bottom" id=' + data[i]._id + ' style="display: inline;">'+data[i].votes.length+' </p><i class="far fa-thumbs-up" style="font-size:24px; padding: 5px; display: inline;"></i></div><button class="w3-button w3-margin-bottom" type="button" id="teste" onclick="voteFunc('+currentUser+', '+data[i]._id+')"><i class="fa fa-chevron-up"> Upvote</i></button><button class="w3-button w3-margin-bottom" type="button"><i class="fa fa-chevron-down"> Downvote</i></button><button class="w3-button w3-margin-bottom"' +
-                        '        type="button"><i class="fa fa-comment"> Comment </i></button>' +
+                        '    <p>' + data[i].content + '</p>' + pic + voto + '<div class="w3-card w3-black" style="display: inline;">'+
+                        '    <p class="w3-margin-bottom" id=' + data[i]._id + ' style="display: inline;">'+data[i].votes.length+' </p><i class="far fa-thumbs-up" style="font-size:24px; padding: 5px; display: inline;"></i></div>'+
                         '    <div class="w3-container w3-card commentSection" name=' + data[i]._id + '>' +
                         comments + '</div>'+
                         '<textarea class="w3-padding w3-round-large w3-light-grey"  id="NewComment" name=' + data[i]._id + ' cols="78%" rows="1" placeholder="Enter a new comment"></textarea>' +
@@ -119,7 +135,7 @@ function voteFunc(user,post){
             data: JSON.stringify({ user: user, post: post }),
             dataType: "json",
             success: function () {
-                $("#upVote"+post).text('Downvote')
+                $("#upVote"+post).text(' Downvote')
                 $("#upVoteBtn"+post).attr("onclick","voteDown('"+user+"','"+post+"')");
                 $("#upVoteBtn"+post).attr("id","downVoteBtn"+post); 
                 $('#upVote'+post).attr({
@@ -141,7 +157,7 @@ function voteDown(user,post){
         data: JSON.stringify({ user: user, post: post }),
         dataType: "json",
         success: function () {
-            $("#downVote"+post).text('Upvote')
+            $("#downVote"+post).text(' Upvote')
             $("#downVoteBtn"+post).attr("onclick","voteFunc('"+user+"','"+post+"')");
             $("#downVoteBtn"+post).attr("id","upVoteBtn"+post); 
             $('#downVote'+post).attr({
@@ -153,7 +169,22 @@ function voteDown(user,post){
     $('#'+''+post+'').text((parseInt(result)-1)) 
 }
 
-//Chat
+
+
+//Remoção de comentario
+function removeComent(idComment, idPost){   
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:3000/api/posts/comment/remove",
+        data: JSON.stringify({ post: idPost, comment:idComment}),
+        dataType: "json",
+        success: function () { 
+            $('#comment'+idComment).remove()
+            $('#image'+idComment).remove()
+        }
+    }) 
+}
  
 $(() => {
     $('#hashtags').load('http://localhost:3000/posts/hashtags');
