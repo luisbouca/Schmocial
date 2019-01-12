@@ -16,6 +16,7 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.2",
+    "json2csv": "^4.3.2",
     "md5": "^2.2.1",
     "moment": "^2.23.0",
     "mongoose": "^5.3.14",

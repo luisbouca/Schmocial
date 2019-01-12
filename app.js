@@ -45,6 +45,11 @@ io.on('connection', function (socket) {
       // Sends to all client including sender     
       io.emit('news', data);
   });
+
+  socket.on('join', function (data) {
+    socket.join(data.email); // We are using room of socket io
+    io.sockets.in('user1@example.com').emit('new_msg', {msg: 'hello'});
+  });
 });
 
 io.on('error', function () {

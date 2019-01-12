@@ -33,12 +33,13 @@ block content
 				//Profile
 				.w3-card.w3-round.w3-black
 					.w3-container
-						h4.w3-center(id="userId" name=username)= utilizador.name
+						h4.w3-center= utilizador.username
+						h4.w3-center(hidden id="userId" name=username)= utilizador.name
 						p.w3-center
 							if(utilizador.picture)
-								img.w3-circle(src="images/profile/"+utilizador.picture style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+								img.w3-circle(id="fotoPerfil" src="images/profile/"+utilizador.picture style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 							else
-								img.w3-circle(src="/w3images/avatar6.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+								img.w3-circle(id="fotoPerfil" src="/w3images/avatar6.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 						hr
 						p 
 							i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
@@ -165,27 +166,20 @@ block content
 												if m.user==''+utilizador._id+':'+utilizador.name+''
 													i.fa.fa-trash.fa-lg(style="float:right" onclick="removeComent('"+m._id+"','"+p._id+"')")
 								textarea.w3-padding.w3-round-large.w3-light-grey(id="NewComment", name=p._id, cols="78%", rows="1" placeholder="Enter a new comment")
-				.w3-container#chatPop.w3-display-bottomright(style="position: fixed;height:55%;width:20%;bottom: 0;display:none;margin-right:21%;background-color: #fff;right: 0;flex-wrap: wrap;overflow-y: scroll;")
-					.w3-container
-						.w3-center
-						br
-						span.w3-button.w3-xlarge.w3-transparent.w3-display-topright(onclick="document.getElementById('chatPop').style.display='none'" title='Close Modal') &times;
-						img.right(src='/w3images/avatar6.png' style="height:24px;width:24px" alt='Avatar')
-						span.time-right(style="margin-left:1%") FF
-						p Hey! I&apos;m fine. Thanks for asking!. Thanks for asking!. Thanks for asking!Thanks for asking!. Thanks for asking!
-						span.time-left 11:01
-						br
+				.w3-container#chatPop.w3-display-bottomright(style="position: fixed;height:55%;width:20%;bottom: 0;display:none;margin-right:21%;background-color: #fff;right: 0;")
+					.w3-container.w3-light-grey.w3-display-topleft(style="height:50px; width:100%;")
+						.w3-margin-top
+							span.w3-display-topmiddle(id="chatUserName" class="time-right")
+							span.w3-button.w3-xlarge.w3-transparent.w3-display-topright(onclick="document.getElementById('chatPop').style.display='none'" title='Close Modal') &times;
 						br 
-					.w3-container
-						label Texts
-							input.w3-input.w3-borderless.w3-margin-bottom(type="text" name="message" id="message" placeholder="Write a mensage" style="width:100%") 
-						.w3-container(id="chatId")
-						button.w3-btn.w3-blue(type="button" id="sendMessage") Send
-				//Right Column
+					.w3-container(id="chatId" style="height:60%;width:100%;margin-right:21%; margin-top:20%;background-color: #fff;right: 0;flex-wrap: wrap;overflow-y: auto;")
+					.w3-container.w3-display-bottomleft(style="width:100%")
+						input.w3-input.w3-borderless.w3-margin-bottom(type="text" name="message" id="message" placeholder="Write a mensage" style="width:100%") 
+						//Right Column
 			.w3-col.m2(style="position:sticky; top:0;")
 				.w3-card.w3-round.w3-black.w3-center(id="conteudoEventos")
 				br
-				.w3-card.w3-round.w3-black.w3-center
+				.w3-card.w3-round.w3-black.w3-center.w3-padding
 					.w3-container(id="friendsContainer") 
 				br
 				.w3-card.w3-round.w3-black.w3-padding-16.w3-center(id="chatUsers") 

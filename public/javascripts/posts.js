@@ -204,8 +204,9 @@ $(() => {
             if (e.which == 13) { 
                 e.preventDefault();
                 $('.commentSection').each(function () {
-                    if ($(this).attr("name") == targetInput.attr('name')) {
-                        $(this).append('<p>' + targetInput.val() + '</p>');
+                    if ($(this).attr("name") == targetInput.attr('name')) { 
+var myvar = '<img class="w3-circle" src="'+$('#fotoPerfil').attr('src')+'" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" /><p class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+$('#userId').text()+'</span><span style="margin-left:1%;">'+ targetInput.val() +'</span><i class="fa fa-trash fa-lg" style="float:right;"></i></p>';
+                        $(this).append(myvar);
                     }
                 });
                 // $("#commentSection").append('<p>'+targetInput.val()+'</p>');
@@ -243,7 +244,7 @@ $.ajax({
         $("#chatUsers").append("<h3>Chat</h3>") 
         if(data.length!=0){ 
             for(i=0; i<data[0].friends.length; i++){
-                var myvar = '<p><img style="margin-right:2%" src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="32"><span class="w3-hover-white" onclick="document.getElementById(\'chatPop\').style.display=\'block\'; loadUser('+'\''+data[0].friends[i].id+'\');" style="cursor: pointer">'+data[0].friends[i].name+'</span></p>';
+                var myvar = '<p><img style="margin-right:2%" src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="32"><span class="w3-hover-white" onclick="document.getElementById(\'chatPop\').style.display=\'block\'; loadUser('+'\''+data[0].friends[i].id+'\','+'\''+data[0].friends[i].name+'\');" style="cursor: pointer">'+data[0].friends[i].name+'</span></p>';
                 $("#chatUsers").append(myvar) 
             }
 }

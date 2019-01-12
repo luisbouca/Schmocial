@@ -35,7 +35,10 @@ block content
 					.w3-container
 						h4.w3-center(id="userId" name=username)= utilizador.name
 						p.w3-center
-							img.w3-circle(src="/images/capa.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+							if(utilizador.picture)
+								img.w3-circle(id="fotoPerfil" src="images/profile/"+utilizador.picture style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+							else
+								img.w3-circle(id="fotoPerfil" src="/w3images/avatar6.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 						hr
 						p 
 							i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
@@ -155,9 +158,9 @@ block content
 									each m in p.comments
 										if m.picture
 											if(utilizador.picture==m.picture)
-												img.w3-circle(id="image"+m._id src="images/profile/"+utilizador.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+												img.w3-circle(id="image"+m._id src="/images/profile/"+utilizador.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 											else
-												img.w3-circle(id="image"+m._id src="images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+												img.w3-circle(id="image"+m._id src="/images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 										else
 											img.w3-circle(id="image"+m._id src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 										p.w3-padding.w3-round-large.w3-light-grey(id="comment"+m._id style="display:inline-block;width:90%") 

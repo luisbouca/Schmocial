@@ -134,7 +134,7 @@ router.get('/friends', verifyAuth, function (req, res) {
 router.get('/friends/:id', verifyAuth, function (req, res) {
   axios.get('http://localhost:3000/api/posts/user/'+req.params.id)
     .then(resposta => {  
-      res.render('friend', { posts: resposta.data, username:req.params.id.split(":")[1] })
+      res.render('friend', { posts: resposta.data, username:req.params.id.split(":")[1], utilizador:req.user })
     })
     .catch(erro => {
       console.log('Erro ao carregar da bd')

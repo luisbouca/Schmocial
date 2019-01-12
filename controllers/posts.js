@@ -43,6 +43,7 @@ Posts.getByTitle = title=>{
 Posts.getByUser = user=>{
     return Post
         .find({owner: user})
+        .sort({_id:-1}) 
         .exec()
 }
 
