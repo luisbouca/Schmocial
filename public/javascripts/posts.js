@@ -244,7 +244,7 @@ $.ajax({
         $("#chatUsers").append("<h3>Chat</h3>") 
         if(data.length!=0){ 
             for(i=0; i<data[0].friends.length; i++){
-                var myvar = '<p><img style="margin-right:2%" src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="32"><span class="w3-hover-white" onclick="document.getElementById(\'chatPop\').style.display=\'block\'; loadUser('+'\''+data[0].friends[i].id+'\','+'\''+data[0].friends[i].name+'\');" style="cursor: pointer">'+data[0].friends[i].name+'</span></p>';
+                var myvar = '<p><img style="margin-right:2%" src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="32"><span class="w3-hover-white" onclick="loadUser('+'\''+data[0].friends[i].id+'\','+'\''+data[0].friends[i].name+'\');" style="cursor: pointer">'+data[0].friends[i].name+'</span></p>';
                 $("#chatUsers").append(myvar) 
             }
 }

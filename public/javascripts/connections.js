@@ -44,9 +44,9 @@ var pic=""
 
                         }
                         if(!data[i].picture){
-                            pic='<img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">'
+                            pic='<img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="w3-circle" width="60px">'
                         }else{
-                            pic='<img src='+"images/profile/"+data[i].picture+' class="img-circle" width="60px">'
+                            pic='<img src='+"images/profile/"+data[i].picture+' class="w3-circle" width="60px">'
                         }
 var myvar = 
 '  <div class="row">'+

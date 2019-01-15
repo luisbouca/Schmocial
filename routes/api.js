@@ -3,6 +3,7 @@ var router = express.Router();
 var Users = require('../controllers/users')
 var Events = require('../controllers/events')
 var Posts = require('../controllers/posts')
+var Messages = require('../controllers/messages')
 var passport = require('passport')
 var jwt = require('jsonwebtoken')
 
@@ -219,6 +220,48 @@ router.get('/friends/get/:id', (req, res)=>{
 router.get('/friends/get/user/:id', (req, res)=>{ 
     Users.getUserFriends(req.params.id)
     .then(dados => res.jsonp(dados))
+})
+
+//Create new messages beetween users
+router.post('/messages/', (req, res)=>{ 
+   var mensagens = {
+        nome: req.body.nome,
+        foto: req.body.foto,
+        texto:req.body.mensagem
+    }
+    var mensagem = {
+        idUser1:req.body.idUser1,
+        idUser2:req.body.idUser2, 
+        mensagens:mensagens
+    }
+    Messages.insertNew(mensagem)
+    .then(dados => res.jsonp(dados))
+
+})
+
+//Update messages beetween users
+router.post('/messages/update', (req, res)=>{ 
+    var mensagens = {
+         nome: req.body.nome,
+         foto: req.body.foto,
+         texto:req.body.mensagem
+     }
+     var mensagem = {
+         idUser1:req.body.idUser1,
+         idUser2:req.body.idUser2, 
+         mensagens:mensagens
+     } 
+     Messages.addMessages(mensagem)
+     .then(dados => res.jsonp(dados))
+ 
+ })
+
+
+//Get messages beetween users
+router.get('/messages/:id/:id2', (req, res)=>{ 
+    Messages.listBetweenUsers(req.params.id,req.params.id2)
+    .then(dados => res.jsonp(dados))
+
 })
 
 module.exports = router;

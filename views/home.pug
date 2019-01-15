@@ -3,10 +3,10 @@ extends layout
 block content
 	//navbar
 	.w3-top
-		.w3-bar.w3-left-align.w3-large#navBar.w3-black
+		.w3-bar.w3-theme-d2.w3-left-align.w3-large#navBar.w3-black
 			a.w3-bar-item.w3-button.w3-hover-black.w3-hide-medium.w3-hide-large.w3-right(href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu")
 				i.fa.fa-bars
-			a(href="/home").w3-bar-item.w3-button.w3-padding-large.w3-hover-white
+			a(href="/home").w3-bar-item.w3-theme-d4.w3-button.w3-padding-large.w3-hover-white
 				i.fa.fa-home.w3-margin-right
 				i Schmocial
 			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
@@ -169,7 +169,7 @@ block content
 				.w3-container#chatPop.w3-display-bottomright(style="position: fixed;height:55%;width:20%;bottom: 0;display:none;margin-right:21%;background-color: #fff;right: 0;")
 					.w3-container.w3-light-grey.w3-display-topleft(style="height:50px; width:100%;")
 						.w3-margin-top
-							span.w3-display-topmiddle(id="chatUserName" class="time-right")
+							span.w3-display-middle(id="chatUserName" class="time-right")
 							span.w3-button.w3-xlarge.w3-transparent.w3-display-topright(onclick="document.getElementById('chatPop').style.display='none'" title='Close Modal') &times;
 						br 
 					.w3-container(id="chatId" style="height:60%;width:100%;margin-right:21%; margin-top:20%;background-color: #fff;right: 0;flex-wrap: wrap;overflow-y: auto;")
