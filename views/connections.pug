@@ -3,28 +3,20 @@ extends layout
 block content
 	//navbar
 	.w3-top
-		.w3-bar.w3-left-align.w3-large#navBar.w3-black
+		.w3-bar.w3-theme-d2.w3-left-align.w3-large#navBar.w3-black
 			a.w3-bar-item.w3-button.w3-hover-black.w3-hide-medium.w3-hide-large.w3-right(href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu")
 				i.fa.fa-bars
-			a(href="/home").w3-bar-item.w3-button.w3-padding-large.w3-hover-white
+			a(href="/home").w3-bar-item.w3-theme-d4.w3-button.w3-padding-large.w3-hover-white
 				i.fa.fa-home.w3-margin-right
 				i Schmocial
 			a(href="#" title="News").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-globe
-			a(href="#" title="Account Settings").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
+			a(href="/profile/"+username+":"+utilizador.name title="Profile").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-user
 			a(href="#" title="Messages").w3-bar-item.w3-button.w3-hide-small.w3-padding-large.w3-hover-white
 				i.fa.fa-envelope
-			a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-padding-large.w3-hover-white(title="My Account")
+			a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-padding-large.w3-hover-white(href="/users/logout" title="My Account")
 				img.w3-circle(src="/w3images/avatar2.png" style="height:23px;width:23px" alt="Avatar")
-			.w3-dropdown-hover-w3-hide-small
-				button.w3-button.w3-padding-large.w3-hover-white(title="Notifications")
-					i.fa.fa-bell
-					span.w3-badge.w3-right.w3-small.w3-white 3
-				.w3-dropdown-content.w3-card-4.w3-bar-block(style="width:300px")
-					a.w3-bar-item.w3-button(href="#") One new friend request
-					a.w3-bar-item.w3-button(href="#") John Doe posted on your wall
-					a.w3-bar-item.w3-button(href="#") Jane upvoted your post
 	//Grid
 	//Grid
 	.w3-container.w3-content(style="max-width:1400px;margin-top:80px")
