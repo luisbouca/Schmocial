@@ -7,34 +7,31 @@ $(() => {
             if($("#message").val()!=""){
             var foto = $('#fotoPerfil').attr('src')
             var nome = $('#userId').text() 
+            var url
+            var userOrigem = $('#userId').attr('name') 
+            if(empty==0){
+                url="http://localhost:3000/api/messages/"
+            }else{
+                url="http://localhost:3000/api/messages/update"
+            }
+            alert(url)
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: url,
+                data: JSON.stringify({ mensagem: $("#message").val(), idUser1:userOrigem, idUser2:personTalkingTo, nome:nome, foto:foto}),
+                dataType: "json",
+                success: function () { 
+                    
+                }
+            }) 
             socket.emit("news", { message: $("#message").val(), foto:foto,nome:nome })
+            empty=1
             } 
         }
     });
 
     socket.on('news', function (data) {
-        var url
-        var userOrigem = $('#userId').attr('name')
-        var nome = $('#userId').text() 
-        var foto = $('#fotoPerfil').attr('src')
-        if(empty==0){
-            url="http://localhost:3000/api/messages/"
-        }else{
-            url="http://localhost:3000/api/messages/update"
-        }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: url,
-            data: JSON.stringify({ mensagem: data.message, idUser1:userOrigem, idUser2:personTalkingTo, nome:nome, foto:foto}),
-            dataType: "json",
-            success: function () { 
-                
-            }
-        }) 
-
-
-        
 var myvar = '<img class="w3-circle" src="'+data.foto+'" style="height:24px;width:24px;" alt="Avatar" /><span class="time-right" style="margin-left:1%;">'+data.nome+'</span>'+
 '<p><font size="2">'+data.message+'</font></p>'; 
         $("#chatId").append(myvar)

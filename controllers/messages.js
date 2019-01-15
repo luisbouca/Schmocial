@@ -6,7 +6,9 @@ const Messages = module.exports
 //Get Messages between users
 Messages.listBetweenUsers = (user1,user2)=>{  
     return Message
-    .find({idUser1:user1, idUser2:user2},{messages:0}) 
+    .find(
+        { $or : [ { idUser1 : user1, idUser2:user2 }, {idUser1 : user2, idUser2 :user1 } ] }
+    ,{messages:0}) 
     .exec()
         
 }
@@ -17,7 +19,7 @@ Messages.addMessages = info=>{
         console.log("Mensagem "+key)
      }
     return Message
-        .update({idUser1:info.idUser1, idUser2:info.idUser2}, {$push:{mensagens:info.mensagens}})
+        .update({ $or : [ { idUser1 : info.idUser1, idUser2:info.idUser2 }, {idUser1 : info.idUser2, idUser2 :info.idUser1 } ] }, {$push:{mensagens:info.mensagens}})
         .exec()
         
 }
