@@ -61,6 +61,7 @@ function loadUser(id, name) {
                     '<p><font size="2">'+data[0].mensagens[i].texto+'</font></p>'; 
                     $("#chatId").append(myvar)
                 }
+                $("#chatId").animate({ scrollTop: $('#chatId').prop("scrollHeight")}, 0);
             }else{
                 empty=0
             } 

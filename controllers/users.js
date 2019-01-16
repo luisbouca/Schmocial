@@ -33,7 +33,7 @@ Users.insertNewFriend = newFriend=>{
 //Get Friend Request
 Users.getFriends = id=>{
     return User
-        .find({_id: id, "friends.state":"request"}, {_id:0,friends:1})
+        .find({_id: id, "friends.state":"request"}, {_id:0,"friends.$":1})
         .exec()
 }
 
