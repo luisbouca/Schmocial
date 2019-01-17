@@ -92,12 +92,15 @@ block content
 					each p in posts			
 						.w3-container.w3-card.w3-black.w3-round.w3-margin
 							br
-							img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/images/profile/"+utilizador.picture alt="Avatar")
-							span.w3-right.w3-opacity= p.date
+							if(utilizador.picture)
+								img.w3-left.w3-circle.w3-margin-right(id="fotoPerfil" src="/images/profile/"+utilizador.picture style="width:60px" alt="Avatar")
+							else
+								img.w3-left.w3-circle.w3-margin-right(id="fotoPerfil" src="/w3images/avatar6.png" style="width:60px" alt="Avatar")
+							span.w3-right.w3-opacity= p.date  
+							h4= p.owner.split(":")[1]
 							br
 							button.w3-right(onclick="erasePost('"+p._id+"')") 
-								i.fas.fa-trash Erase Post   
-							h4= p.owner.split(":")[1]
+								i.fas.fa-trash Erase Post 
 							br
 							hr.w3-clear
 							p= p.content 

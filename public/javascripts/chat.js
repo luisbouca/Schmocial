@@ -14,7 +14,6 @@ $(() => {
             }else{
                 url="http://localhost:3000/api/messages/update"
             }
-            alert(url)
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
@@ -25,18 +24,23 @@ $(() => {
                     
                 }
             }) 
-            socket.emit("news", { message: $("#message").val(), foto:foto,nome:nome })
+            socket.emit("news", { message: $("#message").val(), foto:foto,nome:nome, idUser1:userOrigem, idUser2:personTalkingTo })
             empty=1
             } 
         }
     });
 
     socket.on('news', function (data) {
-var myvar = '<img class="w3-circle" src="'+data.foto+'" style="height:24px;width:24px;" alt="Avatar" /><span class="time-right" style="margin-left:1%;">'+data.nome+'</span>'+
-'<p><font size="2">'+data.message+'</font></p>'; 
-        $("#chatId").append(myvar)
-        $("#message").val('')
-        $("#chatId").animate({ scrollTop: $('#chatId').prop("scrollHeight")}, 0);
+       // loadDataFromDB(data.idUser2)
+        if(data.idUser2==$('#userId').attr('name')||data.idUser1==$('#userId').attr('name')){
+            var myvar = '<img class="w3-circle" src="'+data.foto+'" style="height:24px;width:24px;" alt="Avatar" /><span class="time-right" style="margin-left:1%;">'+data.nome+'</span>'+
+            '<p><font size="2">'+data.message+'</font></p>'; 
+                    $("#chatId").append(myvar)
+                    $("#message").val('')
+                    $("#chatId").animate({ scrollTop: $('#chatId').prop("scrollHeight")}, 0);
+                    $("#message").attr("autofocus", true)
+    $('#chatPop').css('display', 'block') 
+        }
         
     });
 })
@@ -45,9 +49,18 @@ var personTalkingTo
 var nomeUserDestino
 var empty
 function loadUser(id, name) {
-    $("#chatId").html('')
-    var userOrigem = $('#userId').attr('name')
+    $("#chatId").html('') 
     nomeUserDestino = name
+    loadDataFromDB(id)
+
+    personTalkingTo=id
+    $('#chatUserName').text(name)
+    $('#chatPop').css('display', 'block') 
+} 
+
+
+function loadDataFromDB(id) {  
+    var userOrigem = $('#userId').attr('name') 
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -66,9 +79,5 @@ function loadUser(id, name) {
                 empty=0
             } 
         }
-    }) 
-
-    personTalkingTo=id
-    $('#chatUserName').text(name)
-    $('#chatPop').css('display', 'block') 
+    })  
 } 

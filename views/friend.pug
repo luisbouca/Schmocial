@@ -64,13 +64,13 @@ block content
 									if p.votes
 										- var cont = 0
 										each v in p.votes
-											if v==username 
+											if v==utilizador._id 
 												- cont=1
 										if cont == 1
-											button.w3-button.w3-hover-white(type="button" id="downVoteBtn"+p._id onclick="voteDown('"+username+"', '"+p._id+"')")
+											button.w3-button.w3-hover-white(type="button" id="downVoteBtn"+p._id onclick="voteDown('"+utilizador._id+"', '"+p._id+"')")
 												i.fa.fa-chevron-down(id="downVote"+p._id)  Downvote
 										else
-											button.w3-button.w3-hover-white(type="button" id="upVoteBtn"+p._id onclick="voteFunc('"+username+"', '"+p._id+"')")
+											button.w3-button.w3-hover-white(type="button" id="upVoteBtn"+p._id onclick="voteFunc('"+utilizador._id+"', '"+p._id+"')")
 												i.fa.fa-chevron-up(id="upVote"+p._id)  Upvote 
 										.w3-card.w3-black(style="display: inline")
 											p(id=p._id style="display: inline")= p.votes.length  
