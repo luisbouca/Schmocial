@@ -251,4 +251,16 @@ $.ajax({
     }
 })
 
+//Clique no butão de exportar
+$('#exporta').click(function () {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "http://localhost:3000/export",
+        success: function (data) { 
+            alert(data)
+        }
+    }) 
+});
+
 })

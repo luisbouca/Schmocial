@@ -58,3 +58,10 @@ Events.insertNew = newDoc=>{
     return Event
         .create(newDoc)
 }
+
+//Export Events list
+Events.export = ()=>{
+    return Event
+        .find({}) 
+        .exec()
+}

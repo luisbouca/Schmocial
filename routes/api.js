@@ -6,6 +6,28 @@ var Posts = require('../controllers/posts')
 var Messages = require('../controllers/messages')
 var passport = require('passport')
 var jwt = require('jsonwebtoken')
+var csv = require('csv-express');
+var Post = require('../models/post')
+var fs = require('fs')
+var async = require('async');
+
+/* Export Data. */
+router.get('/export', async function(req, res, next) {
+    let data
+    //guarda toda a informação das coleções na variavel data
+   try {
+      data = await Promise.all([
+         Posts.export(),
+         Events.export(),
+         Messages.export(),
+         Users.export()
+      ]);
+   //data[0] = Posts.list result, data[1] = Events.list result etc..
+   res.status(200).json(data)
+   } catch (e) {
+    res.status(500).send('error');  
+   }
+  });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

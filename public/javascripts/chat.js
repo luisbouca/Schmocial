@@ -30,8 +30,7 @@ $(() => {
         }
     });
 
-    socket.on('news', function (data) {
-       // loadDataFromDB(data.idUser2)
+    socket.on('news', function (data) { 
         if(data.idUser2==$('#userId').attr('name')||data.idUser1==$('#userId').attr('name')){
             var myvar = '<img class="w3-circle" src="'+data.foto+'" style="height:24px;width:24px;" alt="Avatar" /><span class="time-right" style="margin-left:1%;">'+data.nome+'</span>'+
             '<p><font size="2">'+data.message+'</font></p>'; 
@@ -40,6 +39,7 @@ $(() => {
                     $("#chatId").animate({ scrollTop: $('#chatId').prop("scrollHeight")}, 0);
                     $("#message").attr("autofocus", true)
     $('#chatPop').css('display', 'block') 
+    personTalkingTo=data.idUser1
         }
         
     });

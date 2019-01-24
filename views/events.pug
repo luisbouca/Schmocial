@@ -68,33 +68,33 @@ block content
 			header.w3-container.w3-black.w3-center.w3-padding-32
 				span.w3-button.w3-black.w3-xlarge.w3-display-topright(onclick="document.getElementById('ticketModal').style.display='none'") &times;
 				h2.w3-wide
-					i.fa.fa-suitcase.w3-margin-right
+					i.fas.fa-address-book
 					| Add new Event
 			.w3-container
 				form.w3-container(action="/events" method="POST" enctype="multipart/form-data")
 					p
 						label
-						i.fa.fa-shopping-cart
+						i.far.fa-calendar-alt
 						|  Data
 					input.w3-input.w3-border(type='date' id="inputDate" required name="inputDate" placeholder='How many?')
 					p
 						label
-						i.fa.fa-shopping-cart
+						i.fas.fa-map-marker
 						|  Local
 					input.w3-input.w3-border(type='text' id="inputLocation" required name="inputLocation" placeholder='How many?')
 					p
 						label
-						i.fa.fa-user
+						i.fas.fa-edit
 						|  Titulo
 					input.w3-input.w3-border(type='text' id="inputTitle" required name="inputTitle" placeholder='Enter email')
 					p
 						label
-						i.fa.fa-user
+						i.fas.fa-comment-alt
 						|  Descrição
 					input.w3-input.w3-border(type='text' id="inputDescription" required name="inputDescription" placeholder='Enter email')
 					p
 						label
-						i.fa.fa-shopping-cart
+						i.fas.fa-clone
 						|  Image
 					input.w3-input.w3-border(type='file' id="inputImage" name="inputImage" placeholder='How many?')
 					input.w3-button.w3-block.w3-teal.w3-padding-16.w3-section.w3-right(type="Submit") 
@@ -109,28 +109,28 @@ block content
 			header.w3-container.w3-black.w3-center.w3-padding-32
 				span.w3-button.w3-black.w3-xlarge.w3-display-topright(onclick="document.getElementById('eventInfo').style.display='none'") &times;
 				h2.w3-wide
-					i.fa.fa-suitcase.w3-margin-right
+					i.fas.fa-address-book
 					| Event Info
 			.w3-container
 				p(hidden id="idDoEvento")
 				p
 					label
-					i.fa.fa-shopping-cart
+					i.far.fa-calendar-alt
 					|  Data
 				p(id="eventoData")
 				p
 					label
-					i.fa.fa-shopping-cart
+					i.fas.fa-map-marker
 					|  Local
 				p(id="eventoLocal")
 				p
 					label
-					i.fa.fa-user
+					i.fas.fa-edit
 					|  Titulo
 				p(id="eventoTitle")
 				p
 					label
-					i.fa.fa-user
+					i.fas.fa-comment-alt
 					|  Descrição
 				p(id="eventoDescription")
 				p

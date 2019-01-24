@@ -3,6 +3,13 @@ var moment = require('moment');
 
 const Messages = module.exports
 
+//Get all Messages 
+Messages.export = ()=>{  
+    return Message
+    .find({}) 
+    .exec() 
+}
+
 //Get Messages between users
 Messages.listBetweenUsers = (user1,user2)=>{  
     return Message

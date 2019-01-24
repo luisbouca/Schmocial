@@ -32,6 +32,7 @@ var UserSchema = new schema({
         email: {type: String},
         name: {type: String}
       },
+    access:{type:String}
 })
 
 UserSchema.pre('save', async function(next){

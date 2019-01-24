@@ -6,6 +6,7 @@ var formidable = require('formidable')
 var moment = require('moment');
 var FB = require('fb');
 var passportFacebook = require('../auth/facebook');
+var async = require('async');
 
 /* FACEBOOK ROUTER */
 router.get('/facebook',
@@ -320,6 +321,55 @@ router.get('/facebook/post', verifyAuth, function (req, res) {
       console.log('Erro ao carregar da bd asdasd'+erro) 
     })*/
 
+
+});
+
+
+
+//Exportação da base de dados
+router.get('/export',verifyAuth, function (req, res) {
+  if(req.user.access){
+    axios.get('http://localhost:3000/api/export')
+  .then(resposta => { 
+//tratamos o campo _id para no mongo aparecer ObjectId
+
+  for(i=0;i<resposta.data[0].length;i++){
+    resposta.data[0][i]['_id'] = {'$oid': "" +  resposta.data[0][i]['_id'] + ""} 
+  }
+  for(i=0;i<resposta.data[1].length;i++){
+    resposta.data[1][i]['_id'] = {'$oid':"" +  resposta.data[1][i]['_id'] + ""} 
+  }
+  for(i=0;i<resposta.data[2].length;i++){
+    resposta.data[2][i]['_id'] = {'$oid':"" +  resposta.data[2][i]['_id'] + ""} 
+  }
+  for(i=0;i<resposta.data[3].length;i++){
+    resposta.data[3][i]['_id'] = {'$oid':"" +  resposta.data[3][i]['_id'] + ""} 
+  }
+  
+  var postData=JSON.stringify(resposta.data[0])
+  var eventData=JSON.stringify(resposta.data[1])
+  var messageData=JSON.stringify(resposta.data[2])
+  var userData=JSON.stringify(resposta.data[3]) 
+
+  //Guardamos nos ficheiros de backup toda a informação de cada coleção
+   var arr = [{'filename':'./backup/posts.json', 'content':postData},{'filename':'./backup/events.json', 'content':eventData}
+,{'filename':'./backup/message.json', 'content':messageData},{'filename':'./backup/users.json', 'content':userData}];
+async.map(arr, getInfo, function (e, r) {
+  res.send("Exportação com sucesso! Os dados encontram-se na past backup")
+});
+
+function getInfo(obj, callback) {
+  fs.writeFile(obj.filename, obj.content, callback);
+}
+  })
+  .catch(erro => {
+    console.log('Erro ao carregar da bd asdasd'+erro) 
+  })
+  }else{
+    res.send("Não tens permissões para exportar!!")
+  }
+ 
+  
 
 });
 

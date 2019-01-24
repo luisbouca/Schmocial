@@ -11,11 +11,14 @@ block content
 			//a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
 			//	<i class="fa fa-search"></i>
 			//</a>
-	.w3-container.w3-white(style="height:100%")
-		.w3-container.w3-margin
-		.w3-container.w3-half.w3-margin-top
-			p Welcome to Schmocial a network for you and your friends
-			img(src="/images/homepage.jpg" style="width:50%").w3-round.w3-grayscale-max
+	.w3-container.w3-white.w3-display-middle(class="mySlides" style="height:100%;width:100%; background-image: url('/images/homepageSub.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;")
+		.w3-card.w3-display-middle.w3-padding.w3-white(style="text-align:center")
+			h1(style="font-family:Aldrich") Connect with the world!
+			h3 See what other people do and interact with them
+	.w3-container.w3-white.w3-display-middle(class="mySlides" style="height:100%;width:100%; background-image: url('/images/homepage.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;")
+	.w3-container.w3-white.w3-display-middle(class="mySlides" style="height:100%;width:100%; background-image: url('/images/homepageSub1.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;")
+	button.w3-button.w3-black.w3-display-left(onclick='plusDivs(-1)') &#x276E;
+	button.w3-button.w3-black.w3-display-right(onclick='plusDivs(1)') &#x276F;
 	.w3#id01.w3-modal
 		.w3-modal-content.w3-card-4.w3-animate-zoom(style='max-width:600px')
 			.w3-center
@@ -81,3 +84,4 @@ block content
 				button.w3-button.w3-red(onclick="document.getElementById('id02').style.display='none'" type='button') Cancel
 	footer.w3-container.w3-black
 		address Copyright@Schmocial 2018
+	script(src='/javascripts/index.js')

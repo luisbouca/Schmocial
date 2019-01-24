@@ -69,3 +69,9 @@ Users.insertNew = newDoc=>{
     return User
         .create(newDoc)
 }
+//Export Users list
+Users.export = ()=>{
+    return User
+        .find({})
+        .exec()
+}

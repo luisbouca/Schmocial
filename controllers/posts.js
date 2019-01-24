@@ -115,3 +115,10 @@ Posts.insertNew = newDoc=>{
     return Post
         .create(newDoc)
 }
+
+//Exports Posts list
+Posts.export = ()=>{
+    return Post
+        .find({}) 
+        .exec()
+}
