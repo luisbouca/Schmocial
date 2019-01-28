@@ -37,11 +37,12 @@ block content
 							if(utilizador.picture)
 								img.w3-circle(id="fotoPerfil" src="images/profile/"+utilizador.picture style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 							else
-								img.w3-circle(id="fotoPerfil" src="/w3images/avatar6.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
+								img.w3-circle(id="fotoPerfil" src="/w3images/avatar3.png" style="height:120px;width:120px" alt="Avatar" onload="getUser('"+username+"');")
 						hr
-						p 
-							i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
-							p Designer, UI
+						if utilizador.gender
+							p 
+								i.fa.fa-pencil-alt.fa-fw.w3-margin-right.w3-text-theme
+								p=utilizador.gender
 						p 
 							i.fa.fa-home.fa-fw.w3-margin-right.w3-text-theme
 							p=utilizador.address.city+", " + utilizador.address.country
@@ -97,7 +98,7 @@ block content
 						if p.state=="public"			
 							.w3-container.w3-card.w3-black.w3-round.w3-margin
 								br
-								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar6.png" alt="Avatar")
+								img.w3-left.w3-circle.w3-margin-right(style="width:60px" src="/w3images/avatar3.png" alt="Avatar")
 								span.w3-right.w3-opacity= p.date
 								h4= p.owner.split(":")[1]
 								br
@@ -131,7 +132,7 @@ block content
 												else
 													img.w3-circle(id="image"+m._id src="images/profile/"+m.picture style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 											else
-												img.w3-circle(id="image"+m._id src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
+												img.w3-circle(id="image"+m._id src="/w3images/avatar3.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar")
 											p.w3-padding.w3-round-large.w3-light-grey(id="comment"+m._id style="display:inline-block;width:90%") 
 												span(style="color:blue; font-weight: bold")= m.user.split(":")[1]
 												span(style="margin-left:1%")= m.message

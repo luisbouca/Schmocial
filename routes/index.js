@@ -174,7 +174,7 @@ router.get('/posts/hashtags', verifyAuth, function (req, res) {
 
 });
 
-//Get posts filtered // Esta route acho que nao esta a ser usada xD
+//Get posts filtered 
 router.post('/posts/filter', verifyAuth, function (req, res) {
  
   console.log("OPEE"+req.body)

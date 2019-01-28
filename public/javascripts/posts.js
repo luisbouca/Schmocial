@@ -54,7 +54,7 @@ function filterHash(teste) {
                             if(data[i].comments[j].picture){
                                 comments = comments + '<img id="image'+data[i].comments[j]._id+'" class="w3-circle" src="images/profile/'+data[i].comments[j].picture+'" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'  
                             }else{ 
-                                comments = comments + '<img id="image'+data[i].comments[j]._id+'" class="w3-circle" src="/w3images/avatar6.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'                               
+                                comments = comments + '<img id="image'+data[i].comments[j]._id+'" class="w3-circle" src="/w3images/avatar3.png" style="height:48px;width:48px;display:inline-block;margin-right:10px;" alt="Avatar" />'                               
                             }
                             if(data[i].comments[j].user==(currentUser+':'+$('#userId').text())){
                                 comments = comments + '<p id="comment'+data[i].comments[j]._id+'" class="w3-padding w3-round-large w3-light-grey" style="display:inline-block;width:90%;"> <span style="color:blue; font-weight: bold;">'+ data[i].comments[j].user.split(":")[1] + '</span><span style="margin-left:1%;">'+ data[i].comments[j].message +'</span><i class="fa fa-trash fa-lg" style="float:right;" onclick="removeComent('+'\''+data[i].comments[j]._id+'\','+'\''+data[i]._id+'\')"></i></p>'
@@ -78,7 +78,7 @@ function filterHash(teste) {
                         }
                     } 
                     myvar = myvar + '<div class="w3-container w3-card w3-black w3-round w3-margin"><br/>' +
-                        '<img class="w3-left w3-circle w3-margin-right" style="width:60px;" src="/w3images/avatar6.png" alt="Avatar" /><span class="w3-right w3-opacity">32 min</span>' +
+                        '<img class="w3-left w3-circle w3-margin-right" style="width:60px;" src="/w3images/avatar3.png" alt="Avatar" /><span class="w3-right w3-opacity">32 min</span>' +
                         '    <h4>'+data[i].owner.split(":")[1]+'</h4><br/>' +
                         '    <hr class="w3-clear" />' +
                         '    <p>' + data[i].content + '</p>' + pic + voto + '<div class="w3-card w3-black" style="display: inline;">'+
