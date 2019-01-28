@@ -41,7 +41,8 @@ passport.use(new FacebookStrategy({
                     city: "Porto" 
                 },
                 //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
-                facebook: facebook
+                facebook: facebook,
+                access:"admin"
             });
             user.save(function(err) {
                 if (err) console.log(err);
