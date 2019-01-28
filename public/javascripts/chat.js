@@ -38,8 +38,8 @@ $(() => {
                     $("#message").val('')
                     $("#chatId").animate({ scrollTop: $('#chatId').prop("scrollHeight")}, 0);
                     $("#message").attr("autofocus", true)
-    $('#chatPop').css('display', 'block') 
-    personTalkingTo=data.idUser1
+    //$('#chatPop').css('display', 'block') 
+    //personTalkingTo=data.idUser1
         }
         
     });
